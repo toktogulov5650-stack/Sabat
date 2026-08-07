@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { ContactForm } from "../components/ContactForm";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
@@ -13,30 +14,26 @@ export default function ContactsPage() {
     <>
       <Header />
       <main id="main-content">
-        <section className="page-hero section contact-hero">
-          <div className="container narrow-hero">
-            <span className="eyebrow">Контакты</span>
-            <h1>Будем рады вашему сообщению</h1>
-            <p>Есть идея, вопрос или предложение о сотрудничестве? Напишите нам.</p>
+        <section className="contact-editorial-hero section">
+          <div className="container">
+            <span className="section-index">/ Открыты к диалогу</span>
+            <h1>ДАВАЙТЕ<br /><em>ПОГОВОРИМ</em></h1>
+            <div className="contact-intro-grid">
+              <p>Есть идея, вопрос или предложение о сотрудничестве? Будем рады вашему сообщению.</p>
+              <div className="contact-mini-photo">
+                <Image src="/hero-students.jpg" alt="Образовательное сообщество" fill sizes="320px" />
+              </div>
+            </div>
           </div>
         </section>
 
-        <section className="section contact-section">
+        <section className="section section-soft contact-section">
           <div className="container contact-grid">
             <div className="contact-details">
-              <span className="eyebrow">Как с нами связаться</span>
-              <div className="contact-item">
-                <span>Электронная почта</span>
-                <a href="mailto:info@sabat.kz">info@sabat.kz</a>
-              </div>
-              <div className="contact-item">
-                <span>Местоположение</span>
-                <p>Алматы, Казахстан</p>
-              </div>
-              <div className="contact-item">
-                <span>Время ответа</span>
-                <p>Обычно в течение 1–2 рабочих дней</p>
-              </div>
+              <span className="section-index">/ Контакты</span>
+              <div className="contact-item"><span>Электронная почта</span><a href="mailto:info@sabat.kz">info@sabat.kz</a></div>
+              <div className="contact-item"><span>Местоположение</span><p>Алматы, Казахстан</p></div>
+              <div className="contact-item"><span>Время ответа</span><p>1–2 рабочих дня</p></div>
             </div>
             <ContactForm />
           </div>

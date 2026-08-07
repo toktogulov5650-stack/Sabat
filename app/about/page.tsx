@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
@@ -9,10 +10,10 @@ export const metadata: Metadata = {
 };
 
 const values = [
-  ["Открытость", "Говорим понятно, слушаем внимательно и создаём пространство для разных взглядов."],
-  ["Развитие", "Верим в обучение на протяжении всей жизни и поддерживаем стремление двигаться вперёд."],
-  ["Ответственность", "Относимся внимательно к людям, ресурсам и результатам каждой инициативы."],
-  ["Сотрудничество", "Объединяем опыт и усилия, потому что большие изменения создаются вместе."],
+  ["01", "Открытость", "Говорим понятно, слушаем внимательно и создаём пространство для разных взглядов."],
+  ["02", "Развитие", "Поддерживаем стремление учиться, исследовать и уверенно двигаться вперёд."],
+  ["03", "Ответственность", "Внимательно относимся к людям, ресурсам и результатам каждой инициативы."],
+  ["04", "Сотрудничество", "Объединяем опыт и усилия, потому что большие изменения создаются вместе."],
 ];
 
 export default function AboutPage() {
@@ -20,41 +21,46 @@ export default function AboutPage() {
     <>
       <Header />
       <main id="main-content">
-        <section className="page-hero section">
-          <div className="container narrow-hero">
-            <span className="eyebrow">О фонде</span>
-            <h1>Мы верим в силу знаний и людей</h1>
-            <p>
-              Sabat — образовательный фонд, который создаёт возможности для
-              обучения, поддерживает полезные инициативы и объединяет сообщество.
-            </p>
+        <section className="inner-hero section">
+          <div className="container">
+            <span className="section-index">/ Sabat — образовательный фонд</span>
+            <h1>МЫ ВЕРИМ<br />В СИЛУ <em>ЗНАНИЙ</em></h1>
+            <div className="inner-hero-photo">
+              <Image src="/study-group.jpg" alt="Участники образовательной программы" fill sizes="100vw" priority />
+            </div>
+          </div>
+        </section>
+
+        <section className="section about-mission">
+          <div className="container statement-grid">
+            <span className="section-index">/ 01 — Миссия</span>
+            <div>
+              <h2>Делать качественное образование <em>ближе и понятнее</em></h2>
+              <div className="statement-footer">
+                <p>
+                  Мы хотим, чтобы знания становились реальным инструментом развития —
+                  помогали людям увереннее принимать решения, находить своё направление
+                  и вносить вклад в общество.
+                </p>
+                <p>
+                  Поэтому мы соединяем содержание, практику и сообщество в одном
+                  образовательном опыте.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 
         <section className="section section-soft">
-          <div className="container mission-grid">
-            <div className="mission-label">Наша миссия</div>
-            <div>
-              <h2>Делать качественное образование ближе и понятнее</h2>
-              <p>
-                Мы хотим, чтобы знания становились реальным инструментом развития —
-                помогали людям увереннее принимать решения, находить своё направление
-                и вносить вклад в общество.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section className="section">
           <div className="container">
-            <div className="section-heading">
-              <span className="eyebrow">Наши ценности</span>
-              <h2>То, на что мы опираемся</h2>
+            <div className="editorial-heading">
+              <span className="section-index">/ 02 — Ценности</span>
+              <h2>То, на что<br />мы <em>опираемся</em></h2>
             </div>
-            <div className="values-grid">
-              {values.map(([title, text], index) => (
-                <article className="value-card" key={title}>
-                  <span>0{index + 1}</span>
+            <div className="values-editorial-grid">
+              {values.map(([number, title, text]) => (
+                <article className="editorial-value" key={number}>
+                  <span>{number}</span>
                   <h3>{title}</h3>
                   <p>{text}</p>
                 </article>
@@ -64,17 +70,18 @@ export default function AboutPage() {
         </section>
 
         <section className="section">
-          <div className="container approach-panel">
-            <span className="eyebrow eyebrow-light">Наш подход</span>
-            <div className="approach-copy">
-              <h2>Сначала понимаем потребность. Затем создаём решение.</h2>
+          <div className="container image-text-split">
+            <div className="split-image">
+              <Image src="/students-classroom.jpg" alt="Ученик выполняет учебное задание" fill sizes="50vw" />
+            </div>
+            <div className="split-copy">
+              <span className="section-index">/ 03 — Подход</span>
+              <h2>Сначала понимаем. Затем <em>создаём.</em></h2>
               <p>
-                Мы работаем последовательно: изучаем контекст, привлекаем экспертов,
-                запускаем понятный формат и улучшаем его на основе обратной связи.
+                Изучаем контекст, привлекаем экспертов, запускаем понятный формат и
+                улучшаем его на основе обратной связи.
               </p>
-              <Link className="button button-light" href="/contacts">
-                Предложить сотрудничество <span aria-hidden="true">↗</span>
-              </Link>
+              <Link className="button button-dark" href="/contacts">Предложить сотрудничество ↗</Link>
             </div>
           </div>
         </section>

@@ -1,12 +1,13 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { NewsItem } from "../data/news";
 
 export function NewsCard({ item, detailed = false }: { item: NewsItem; detailed?: boolean }) {
   return (
     <article className="news-card">
-      <div className={`news-cover news-cover-${item.tone}`}>
+      <div className="news-cover">
+        <Image src={item.image} alt={item.imageAlt} fill sizes="(max-width: 700px) 100vw, 33vw" />
         <span>{item.category}</span>
-        <strong aria-hidden="true">S</strong>
       </div>
       <div className="news-card-body">
         <time>{item.date}</time>

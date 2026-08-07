@@ -33,16 +33,15 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     openGraph: {
       title: "Sabat — образовательный фонд",
-      description: "Знания создают возможности.",
+      description: "Знания, которые открывают мир.",
       type: "website",
       locale: "ru_RU",
-      images: [{ url: `${origin}/og.png`, width: 1536, height: 1024 }],
+      url: origin,
     },
     twitter: {
       card: "summary_large_image",
       title: "Sabat — образовательный фонд",
-      description: "Знания создают возможности.",
-      images: [`${origin}/og.png`],
+      description: "Знания, которые открывают мир.",
     },
   };
 }

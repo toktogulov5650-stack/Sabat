@@ -33,6 +33,7 @@ export function Footer() {
         <span>© {new Date().getFullYear()} Sabat</span>
         <span>Знания создают возможности</span>
       </div>
+      <div className="container footer-wordmark" aria-hidden="true">SABAT</div>
     </footer>
   );
 }
