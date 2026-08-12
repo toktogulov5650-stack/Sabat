@@ -17,7 +17,7 @@ export function Header() {
     <header className="site-header">
       <div className="container header-inner">
         <Link className="brand" href="/" aria-label="Sabat — главная">
-          <Image src="/sabat-logo.png" alt="" width={52} height={52} priority unoptimized />
+          <Image src="/sabat-logo.png" alt="" width={40} height={40} priority unoptimized />
         </Link>
         <nav className="desktop-nav" aria-label="Основная навигация">
           {navigation.map((item) => <Link className={pathname === item.href ? "active" : ""} href={item.href} key={item.href}>{item.label}</Link>)}
