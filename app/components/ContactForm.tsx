@@ -30,8 +30,8 @@ export function ContactForm() {
         Сообщение
         <textarea name="message" rows={6} placeholder="Расскажите, чем мы можем помочь" required />
       </label>
-      <button className="button button-primary" type="submit">
-        Отправить сообщение <span aria-hidden="true">↗</span>
+      <button className="form-submit" type="submit">
+        Отправить сообщение <span aria-hidden="true">→</span>
       </button>
       <p className="form-note">Нажатие откроет ваше почтовое приложение.</p>
     </form>

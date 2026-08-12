@@ -22,26 +22,28 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: {
-      default: "Sabat — образовательный фонд",
+      default: "Sabat — фонд общественных инициатив",
       template: "%s | Sabat",
     },
     description:
-      "Sabat создаёт образовательные инициативы и поддерживает людей, которые хотят учиться и развиваться.",
+      "Sabat объединяет людей, поддерживает общественные инициативы и создаёт пространство для добрых перемен.",
     icons: {
       icon: "/sabat-logo.png",
       shortcut: "/sabat-logo.png",
     },
     openGraph: {
-      title: "Sabat — образовательный фонд",
-      description: "Знания, которые открывают мир.",
+      title: "Sabat — фонд общественных инициатив",
+      description: "Объединяем людей вокруг важных дел.",
       type: "website",
       locale: "ru_RU",
       url: origin,
+      images: [{ url: `${origin}/og-sand.png`, width: 1200, height: 630, alt: "Sabat — объединяем людей вокруг важных дел" }],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Sabat — образовательный фонд",
-      description: "Знания, которые открывают мир.",
+      title: "Sabat — фонд общественных инициатив",
+      description: "Объединяем людей вокруг важных дел.",
+      images: [`${origin}/og-sand.png`],
     },
   };
 }

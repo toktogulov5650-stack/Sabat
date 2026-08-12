@@ -4,42 +4,12 @@ import { ContactForm } from "../components/ContactForm";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 
-export const metadata: Metadata = {
-  title: "Контакты",
-  description: "Свяжитесь с образовательным фондом Sabat.",
-};
+export const metadata: Metadata = { title: "Контакты", description: "Свяжитесь с общественным фондом Sabat." };
 
 export default function ContactsPage() {
-  return (
-    <>
-      <Header />
-      <main id="main-content">
-        <section className="contact-editorial-hero section">
-          <div className="container">
-            <span className="section-index">/ Открыты к диалогу</span>
-            <h1>ДАВАЙТЕ<br /><em>ПОГОВОРИМ</em></h1>
-            <div className="contact-intro-grid">
-              <p>Есть идея, вопрос или предложение о сотрудничестве? Будем рады вашему сообщению.</p>
-              <div className="contact-mini-photo">
-                <Image src="/hero-students.jpg" alt="Образовательное сообщество" fill sizes="320px" unoptimized />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="section section-soft contact-section">
-          <div className="container contact-grid">
-            <div className="contact-details">
-              <span className="section-index">/ Контакты</span>
-              <div className="contact-item"><span>Электронная почта</span><a href="mailto:info@sabat.kz">info@sabat.kz</a></div>
-              <div className="contact-item"><span>Местоположение</span><p>Алматы, Казахстан</p></div>
-              <div className="contact-item"><span>Время ответа</span><p>1–2 рабочих дня</p></div>
-            </div>
-            <ContactForm />
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </>
-  );
+  return <><Header /><main id="main-content">
+    <section className="inner-title"><div className="container"><span>Контакты</span><h1>Давайте обсудим,<br />что мы можем сделать вместе</h1></div></section>
+    <section className="wide-cover contact-cover"><Image src="/students-classroom.jpg" alt="Связаться с Sabat" fill priority sizes="100vw" unoptimized /></section>
+    <section className="contact-section"><div className="sand-title"><h2>Мы открыты к диалогу</h2></div><div className="container contact-grid"><aside><h2>Свяжитесь с нами</h2><div><span>Электронная почта</span><a href="mailto:info@sabat.kz">info@sabat.kz</a></div><div><span>Время ответа</span><p>1–2 рабочих дня</p></div><p className="contact-note">Есть идея, вопрос или предложение о сотрудничестве? Будем рады вашему сообщению.</p></aside><ContactForm /></div></section>
+  </main><Footer /></>;
 }
