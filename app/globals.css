@@ -15,17 +15,15 @@ h1,h2,h3,p { margin-top:0; }
 
 /* Header */
 .site-header { position:relative; z-index:50; border-top:3px solid var(--green); background:#fff; }
-.header-inner { display:flex; align-items:center; min-height:96px; }
-.brand { display:flex; align-items:center; gap:12px; color:var(--green); }
+.header-inner { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; min-height:96px; }
+.brand { display:flex; width:max-content; align-items:center; color:var(--green); }
 .brand img { border-radius:50%; }
-.brand > span { display:flex; flex-direction:column; }
-.brand strong { font-size:22px; line-height:1; letter-spacing:.02em; }
-.brand small { margin-top:5px; font-size:8px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; }
-.desktop-nav { display:flex; gap:38px; margin-left:auto; }
+.desktop-nav { display:flex; justify-content:center; gap:38px; }
 .desktop-nav a { position:relative; padding:35px 0; font-size:13px; font-weight:520; }
 .desktop-nav a::after { position:absolute; right:0; bottom:26px; left:0; height:1px; background:var(--green); content:""; transform:scaleX(0); transition:transform .2s; }
 .desktop-nav a:hover::after,.desktop-nav a.active::after { transform:scaleX(1); }
-.header-action { margin-left:42px; padding:15px 24px; border-radius:999px; background:var(--sand); color:#fff; font-size:12px; font-weight:700; }
+.header-action { justify-self:end; padding:14px 24px; border:1px solid var(--ink); border-radius:999px; background:#fff; color:var(--ink); font-size:12px; font-weight:650; transition:background .2s,color .2s; }
+.header-action:hover { background:var(--ink); color:#fff; }
 .mobile-menu { display:none; margin-left:auto; }.mobile-menu summary { width:44px; height:44px; padding:10px; border:1px solid var(--line); border-radius:50%; cursor:pointer; list-style:none; }.mobile-menu summary::-webkit-details-marker{display:none}.mobile-menu summary span{display:block;height:1px;margin:5px 0;background:var(--ink)}
 .mobile-menu nav { position:absolute; top:80px; right:20px; left:20px; display:grid; padding:15px; background:white; box-shadow:0 15px 45px rgba(0,0,0,.12); }.mobile-menu nav a { padding:13px;border-bottom:1px solid var(--line); }
 
