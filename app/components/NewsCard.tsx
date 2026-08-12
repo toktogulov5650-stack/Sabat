@@ -6,7 +6,7 @@ export function NewsCard({ item, detailed = false }: { item: NewsItem; detailed?
   return (
     <article className="news-card">
       <div className="news-cover">
-        <Image src={item.image} alt={item.imageAlt} fill sizes="(max-width: 700px) 100vw, 33vw" />
+        <Image src={item.image} alt={item.imageAlt} fill sizes="(max-width: 700px) 100vw, 33vw" unoptimized />
         <span>{item.category}</span>
       </div>
       <div className="news-card-body">

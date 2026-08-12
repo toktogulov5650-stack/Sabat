@@ -26,7 +26,7 @@ export default function AboutPage() {
             <span className="section-index">/ Sabat — образовательный фонд</span>
             <h1>МЫ ВЕРИМ<br />В СИЛУ <em>ЗНАНИЙ</em></h1>
             <div className="inner-hero-photo">
-              <Image src="/study-group.jpg" alt="Участники образовательной программы" fill sizes="100vw" priority />
+              <Image src="/study-group.jpg" alt="Участники образовательной программы" fill sizes="100vw" priority unoptimized />
             </div>
           </div>
         </section>
@@ -72,7 +72,7 @@ export default function AboutPage() {
         <section className="section">
           <div className="container image-text-split">
             <div className="split-image">
-              <Image src="/students-classroom.jpg" alt="Ученик выполняет учебное задание" fill sizes="50vw" />
+              <Image src="/students-classroom.jpg" alt="Ученик выполняет учебное задание" fill sizes="50vw" unoptimized />
             </div>
             <div className="split-copy">
               <span className="section-index">/ 03 — Подход</span>

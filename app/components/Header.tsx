@@ -18,10 +18,10 @@ export function Header() {
     <header className="site-header">
       <div className="container header-inner">
         <Link className="brand" href="/" aria-label="Sabat — главная">
-          <Image src="/sabat-logo.png" alt="" width={46} height={46} priority />
+          <Image src="/sabat-logo.png" alt="" width={46} height={46} priority unoptimized />
           <span className="brand-copy">
             <strong>Sabat</strong>
-            <small>образовательный фонд</small>
+              <small>Фонд Sabat</small>
           </span>
         </Link>
 

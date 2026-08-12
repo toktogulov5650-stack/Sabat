@@ -21,7 +21,7 @@ export default function ContactsPage() {
             <div className="contact-intro-grid">
               <p>Есть идея, вопрос или предложение о сотрудничестве? Будем рады вашему сообщению.</p>
               <div className="contact-mini-photo">
-                <Image src="/hero-students.jpg" alt="Образовательное сообщество" fill sizes="320px" />
+                <Image src="/hero-students.jpg" alt="Образовательное сообщество" fill sizes="320px" unoptimized />
               </div>
             </div>
           </div>

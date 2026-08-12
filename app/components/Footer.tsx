@@ -7,14 +7,14 @@ export function Footer() {
       <div className="container footer-grid">
         <div>
           <Link className="brand footer-brand" href="/">
-            <Image src="/sabat-logo.png" alt="" width={44} height={44} />
+            <Image src="/sabat-logo.png" alt="" width={44} height={44} unoptimized />
             <span className="brand-copy">
               <strong>Sabat</strong>
-              <small>образовательный фонд</small>
+              <small>Фонд Sabat</small>
             </span>
           </Link>
           <p className="footer-note">
-            Создаём пространство для знаний, развития и новых возможностей.
+            Объединяем людей и поддерживаем важные общественные инициативы.
           </p>
         </div>
         <div className="footer-column">

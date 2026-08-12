@@ -20,7 +20,7 @@ export default function NewsPage() {
             <span className="section-index">/ События · Идеи · Материалы</span>
             <h1>НОВОСТИ<br />И <em>ИСТОРИИ</em></h1>
             <div className="featured-news-visual">
-              <Image src="/hero-students.jpg" alt="Студенты в аудитории" fill sizes="100vw" priority />
+              <Image src="/hero-students.jpg" alt="Студенты в аудитории" fill sizes="100vw" priority unoptimized />
               <div className="hero-shade" />
               <div>
                 <span>Главное</span>
