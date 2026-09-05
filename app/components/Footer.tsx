@@ -4,7 +4,6 @@ import Link from "next/link";
 export function Footer() {
   return (
     <footer className="site-footer">
-      <div className="footer-motto">Здесь мы объединяем людей!</div>
       <div className="container footer-grid">
         <div className="footer-identity"><Image src="/sabat-logo.png" alt="" width={58} height={58} unoptimized /><div><strong>SABAT</strong><span>общественный фонд</span></div></div>
         <div><h3>Фонд Sabat</h3><a href="mailto:info@sabat.kz">info@sabat.kz</a><p>© {new Date().getFullYear()}. Все права защищены</p></div>
