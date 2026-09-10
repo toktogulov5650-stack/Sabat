@@ -16,7 +16,12 @@ npm run dev
 npm run build
 ```
 
-This starter does not use `wrangler.jsonc`.
+Cloudflare Workers deployment is configured in `wrangler.jsonc` and uses the
+native vinext workflow (without OpenNext):
+
+```bash
+npx @vinext/cloudflare deploy
+```
 
 ## Included Shape
 
