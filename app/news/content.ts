@@ -9,6 +9,8 @@ export const archiveCopy = {
     read: "Читать материал",
     imageLabel: "Фото материала",
     back: "Все новости",
+    previous: "Предыдущая новость",
+    next: "Следующая новость",
   },
   ky: {
     pageTitle: "Жаңылыктар",
@@ -18,6 +20,8 @@ export const archiveCopy = {
     read: "Материалды окуу",
     imageLabel: "Материалдын сүрөтү",
     back: "Бардык жаңылыктар",
+    previous: "Мурунку жаңылык",
+    next: "Кийинки жаңылык",
   },
   en: {
     pageTitle: "News",
@@ -27,6 +31,8 @@ export const archiveCopy = {
     read: "Read the story",
     imageLabel: "Story image",
     back: "All news",
+    previous: "Previous story",
+    next: "Next story",
   },
 };
 

@@ -30,7 +30,8 @@ export function NewsArchive() {
     ...item,
     ...localizedNews[language][item.slug],
   }));
-  const [featured, ...latest] = stories;
+  const showcase = stories.slice(0, 3);
+  const latest = stories.slice(3);
 
   return (
     <>
@@ -46,24 +47,25 @@ export function NewsArchive() {
           </div>
         </section>
 
-        <section className="news-featured-section" aria-labelledby="featured-news-title">
-          <div className="container">
-            <Link className="news-featured-story" href={`/news/${featured.slug}`}>
-              <div className={`news-editorial-image tone-${featured.tone}`} aria-hidden="true">
-                <span>{page.imageLabel}</span>
-              </div>
-              <div className="news-featured-copy">
-                <div className="news-editorial-meta">
-                  <span>{featured.category}</span>
-                  <time>{featured.date}</time>
-                </div>
-                <h2 id="featured-news-title">{featured.title}</h2>
-                <p>{featured.excerpt}</p>
-                <span className="news-editorial-link">
-                  {page.read} <span aria-hidden="true">→</span>
-                </span>
-              </div>
-            </Link>
+        <section className="news-showcase" aria-label={page.latest}>
+          <div className="container news-grid news-showcase-grid">
+            {showcase.map((item, index) => (
+              <Link
+                className={`news-card news-showcase-card ${index === 0 ? "featured" : "compact"}`}
+                href={`/news/${item.slug}`}
+                id={`news-showcase-${index + 1}`}
+                key={item.slug}
+              >
+                <div className="news-image-placeholder" aria-hidden="true" />
+                <h3>{item.title}</h3>
+                <time>{item.date}</time>
+              </Link>
+            ))}
+          </div>
+
+          <div className="news-controls">
+            <a href="#news-showcase-2" aria-label={page.previous}>‹</a>
+            <a href="#news-showcase-3" aria-label={page.next}>›</a>
           </div>
         </section>
 
