@@ -5,63 +5,280 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
+type Language = "ru" | "ky" | "en";
+
 const navigation = [
-  { href: "/", label: { ru: "Главная", kk: "Басты бет" } },
-  { href: "/about", label: { ru: "О фонде", kk: "Қор туралы" } },
-  { href: "/news", label: { ru: "Новости", kk: "Жаңалықтар" } },
-  { href: "/contacts", label: { ru: "Контакты", kk: "Байланыстар" } },
+  {
+    href: "/",
+    label: {
+      ru: "Главная",
+      ky: "Башкы бет",
+      en: "Home",
+    },
+  },
+  {
+    href: "/about",
+    label: {
+      ru: "О фонде",
+      ky: "Фонд жөнүндө",
+      en: "About",
+    },
+  },
+  {
+    href: "/news",
+    label: {
+      ru: "Новости",
+      ky: "Жаңылыктар",
+      en: "News",
+    },
+  },
+  {
+    href: "/contacts",
+    label: {
+      ru: "Контакты",
+      ky: "Байланыш",
+      en: "Contacts",
+    },
+  },
 ];
 
-type Language = "ru" | "kk";
+const languageLabels = {
+  ru: {
+    code: "RU",
+    name: "Русский",
+  },
+
+  ky: {
+    code: "KG",
+    name: "Кыргызча",
+  },
+
+  en: {
+    code: "EN",
+    name: "English",
+  },
+};
 
 export function Header() {
   const pathname = usePathname();
-  const [language, setLanguage] = useState<Language>("ru");
-  const languageSwitcherRef = useRef<HTMLDetailsElement>(null);
 
+  const [language, setLanguage] = useState<Language>("ru");
+
+  const languageSwitcherRef = useRef<HTMLDetailsElement>(null);
+  const mobileMenuRef = useRef<HTMLDetailsElement>(null);
+
+  /* Получаем сохранённый язык */
   useEffect(() => {
-    const savedLanguage = window.localStorage.getItem("sabat-language") as Language | null;
-    if (savedLanguage === "ru" || savedLanguage === "kk") setLanguage(savedLanguage);
+    const savedLanguage = window.localStorage.getItem(
+      "sabat-language"
+    ) as Language | null;
+
+    if (
+      savedLanguage === "ru" ||
+      savedLanguage === "ky" ||
+      savedLanguage === "en"
+    ) {
+      setLanguage(savedLanguage);
+      document.documentElement.lang = savedLanguage;
+    }
   }, []);
 
+  /* Закрываем меню при клике снаружи */
   useEffect(() => {
-    function closeLanguageSwitcher(event: PointerEvent) {
-      if (!languageSwitcherRef.current?.contains(event.target as Node)) languageSwitcherRef.current?.removeAttribute("open");
+    function handleOutsideClick(event: PointerEvent) {
+      const target = event.target as Node;
+
+      if (!languageSwitcherRef.current?.contains(target)) {
+        languageSwitcherRef.current?.removeAttribute("open");
+      }
+
+      if (!mobileMenuRef.current?.contains(target)) {
+        mobileMenuRef.current?.removeAttribute("open");
+      }
     }
 
-    document.addEventListener("pointerdown", closeLanguageSwitcher);
-    return () => document.removeEventListener("pointerdown", closeLanguageSwitcher);
+    document.addEventListener("pointerdown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("pointerdown", handleOutsideClick);
+    };
   }, []);
 
+  /* Переключение языка */
   function changeLanguage(nextLanguage: Language) {
-    window.localStorage.setItem("sabat-language", nextLanguage);
-    document.documentElement.lang = nextLanguage;
-    languageSwitcherRef.current?.removeAttribute("open");
     setLanguage(nextLanguage);
-    window.dispatchEvent(new CustomEvent("sabat-language-change", { detail: nextLanguage }));
+
+    window.localStorage.setItem(
+      "sabat-language",
+      nextLanguage
+    );
+
+    document.documentElement.lang = nextLanguage;
+
+    languageSwitcherRef.current?.removeAttribute("open");
+
+    window.dispatchEvent(
+      new CustomEvent("sabat-language-change", {
+        detail: nextLanguage,
+      })
+    );
   }
 
   return (
     <header className="site-header">
       <div className="container header-inner">
-        <Link className="brand" href="/" aria-label="Sabat — главная">
-          <Image src="/sabat-logo.png" alt="" width={52} height={52} priority unoptimized />
+
+        {/* LOGO */}
+        <Link
+          className="brand"
+          href="/"
+          aria-label="Sabat — главная"
+        >
+          <Image
+            src="/sabat-logo.png"
+            alt="Sabat"
+            width={52}
+            height={52}
+            priority
+            unoptimized
+          />
         </Link>
-        <nav className="desktop-nav" aria-label="Основная навигация">
-          {navigation.map((item) => <Link className={pathname === item.href ? "active" : ""} href={item.href} key={item.href}>{item.label[language]}</Link>)}
+
+        {/* DESKTOP NAVIGATION */}
+        <nav
+          className="desktop-nav"
+          aria-label="Основная навигация"
+        >
+          {navigation.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={
+                pathname === item.href
+                  ? "active"
+                  : ""
+              }
+            >
+              {item.label[language]}
+            </Link>
+          ))}
         </nav>
-        <details className="language-switcher" ref={languageSwitcherRef}>
+
+        {/* LANGUAGE SWITCHER */}
+        <details
+          className="language-switcher"
+          ref={languageSwitcherRef}
+        >
           <summary aria-label="Выбрать язык">
-            <svg className="language-globe" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><circle cx="12" cy="12" r="8.5" /><path d="M3.5 12h17M12 3.5c2.1 2.3 3.2 5.2 3.2 8.5S14.1 18.2 12 20.5C9.9 18.2 8.8 15.3 8.8 12S9.9 5.8 12 3.5Z" /></svg>
-            <span className="language-code">{language === "ru" ? "RU" : "ҚАЗ"}</span>
-            <svg className="language-chevron" aria-hidden="true" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="m2.5 4.5 3.5 3 3.5-3" /></svg>
+
+            {/* Globe icon */}
+            <svg
+              className="language-globe"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <circle
+                cx="12"
+                cy="12"
+                r="8.5"
+              />
+
+              <path d="M3.5 12h17" />
+
+              <path d="M12 3.5c2.2 2.35 3.3 5.18 3.3 8.5S14.2 18.15 12 20.5" />
+
+              <path d="M12 3.5C9.8 5.85 8.7 8.68 8.7 12s1.1 6.15 3.3 8.5" />
+            </svg>
+
+            {/* Current language */}
+            <span className="language-code">
+              {languageLabels[language].code}
+            </span>
+
+            {/* Chevron */}
+            <svg
+              className="language-chevron"
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path d="M4 6.5 8 10l4-3.5" />
+            </svg>
+
           </summary>
+
+          {/* Dropdown */}
           <div className="language-options">
-            <button className={language === "ru" ? "selected" : ""} type="button" onClick={() => changeLanguage("ru")}>Русский</button>
-            <button className={language === "kk" ? "selected" : ""} type="button" onClick={() => changeLanguage("kk")}>Қазақша</button>
+
+            <button
+              type="button"
+              className={
+                language === "ky"
+                  ? "selected"
+                  : ""
+              }
+              onClick={() =>
+                changeLanguage("ky")
+              }
+            >
+              Кыргызча
+            </button>
+
+            <button
+              type="button"
+              className={
+                language === "ru"
+                  ? "selected"
+                  : ""
+              }
+              onClick={() =>
+                changeLanguage("ru")
+              }
+            >
+              Русский
+            </button>
+
+            <button
+              type="button"
+              className={
+                language === "en"
+                  ? "selected"
+                  : ""
+              }
+              onClick={() =>
+                changeLanguage("en")
+              }
+            >
+              English
+            </button>
+
           </div>
         </details>
-        <details className="mobile-menu"><summary aria-label="Открыть меню"><span /><span /><span /></summary><nav>{navigation.map((item)=><Link href={item.href} key={item.href}>{item.label[language]}</Link>)}</nav></details>
+
+        {/* MOBILE MENU */}
+        <details
+          className="mobile-menu"
+          ref={mobileMenuRef}
+        >
+          <summary aria-label="Открыть меню">
+            <span />
+            <span />
+            <span />
+          </summary>
+
+          <nav>
+            {navigation.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+              >
+                {item.label[language]}
+              </Link>
+            ))}
+          </nav>
+        </details>
+
       </div>
     </header>
   );
