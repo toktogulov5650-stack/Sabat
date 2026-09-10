@@ -2,38 +2,52 @@
 
 import { FormEvent } from "react";
 
-export function ContactForm() {
+export type ContactFormCopy = {
+  title: string;
+  name: string;
+  namePlaceholder: string;
+  email: string;
+  emailPlaceholder: string;
+  message: string;
+  messagePlaceholder: string;
+  submit: string;
+  mailSubject: string;
+};
+
+export function ContactForm({ copy }: { copy: ContactFormCopy }) {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const name = String(form.get("name") ?? "");
     const email = String(form.get("email") ?? "");
     const message = String(form.get("message") ?? "");
-    const subject = encodeURIComponent(`Сообщение с сайта Sabat — ${name}`);
-    const body = encodeURIComponent(`Имя: ${name}\nEmail: ${email}\n\n${message}`);
+    const subject = encodeURIComponent(`${copy.mailSubject} — ${name}`);
+    const body = encodeURIComponent(`${copy.name}: ${name}\n${copy.email}: ${email}\n\n${message}`);
     window.location.href = `mailto:info@sabat.kz?subject=${subject}&body=${body}`;
   }
 
   return (
     <form className="contact-form" onSubmit={handleSubmit}>
+      <div className="contact-form-heading">
+        <h2>{copy.title}</h2>
+      </div>
       <div className="form-row">
         <label>
-          Ваше имя
-          <input name="name" type="text" placeholder="Как к вам обращаться" required />
+          {copy.name}
+          <input name="name" type="text" placeholder={copy.namePlaceholder} autoComplete="name" required />
         </label>
         <label>
-          Электронная почта
-          <input name="email" type="email" placeholder="name@example.com" required />
+          {copy.email}
+          <input name="email" type="email" placeholder={copy.emailPlaceholder} autoComplete="email" required />
         </label>
       </div>
       <label>
-        Сообщение
-        <textarea name="message" rows={6} placeholder="Расскажите, чем мы можем помочь" required />
+        {copy.message}
+        <textarea name="message" rows={5} placeholder={copy.messagePlaceholder} required />
       </label>
       <button className="form-submit" type="submit">
-        Отправить сообщение <span aria-hidden="true">→</span>
+        {copy.submit} <span aria-hidden="true">→</span>
       </button>
-      <p className="form-note">Нажатие откроет ваше почтовое приложение.</p>
     </form>
   );
 }

@@ -31,7 +31,7 @@ export function NewsArchive() {
     ...localizedNews[language][item.slug],
   }));
   const showcase = stories.slice(0, 3);
-  const latest = stories.slice(3);
+  const latest = stories.slice(1);
 
   return (
     <>
@@ -73,17 +73,14 @@ export function NewsArchive() {
           <div className="container">
             <div className="news-latest-heading">
               <h2 id="latest-news-title">{page.latest}</h2>
-              <span>{String(latest.length).padStart(2, "0")}</span>
             </div>
 
             <div className="news-editorial-list">
-              {latest.map((item, index) => (
+              {latest.map((item) => (
                 <Link className="news-editorial-row" href={`/news/${item.slug}`} key={item.slug}>
-                  <span className="news-editorial-index">{String(index + 2).padStart(2, "0")}</span>
                   <div className={`news-editorial-thumb tone-${item.tone}`} aria-hidden="true" />
                   <div className="news-editorial-row-copy">
                     <div className="news-editorial-meta">
-                      <span>{item.category}</span>
                       <time>{item.date}</time>
                     </div>
                     <h3>{item.title}</h3>

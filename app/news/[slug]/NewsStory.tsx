@@ -30,15 +30,28 @@ export function NewsStory({ slug }: { slug: string }) {
         <article>
           <header className="news-story-header">
             <div className="container">
-              <Link className="news-story-back" href="/news">← {page.back}</Link>
-              <div className="news-editorial-meta"><span>{story.category}</span><time>{story.date}</time></div>
-              <h1>{story.title}</h1>
-              <p>{story.excerpt}</p>
+              <div className="news-story-topline">
+                <Link className="news-story-back" href="/news">← {page.back}</Link>
+              </div>
             </div>
           </header>
           <div className="container">
-            <div className={`news-story-image tone-${source.tone}`} aria-hidden="true"><span>{page.imageLabel}</span></div>
-            <div className="news-story-body"><p>{story.body}</p></div>
+            <section className="news-story-newspaper" aria-label={story.title}>
+              <div className="news-story-paper-grid">
+                <div className={`news-story-inline-photo tone-${source.tone}`} aria-hidden="true">
+                  <span>{page.imageLabel}</span>
+                </div>
+                <div className="news-story-paper-copy">
+                  <h1>{story.title}</h1>
+                  <p className="news-story-paper-intro">{story.excerpt}</p>
+                  <p>{story.body[0]}</p>
+                  <p>{story.body[1]}</p>
+                </div>
+                <div className="news-story-continuation">
+                  {story.body.slice(2).map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                </div>
+              </div>
+            </section>
           </div>
         </article>
       </main>
