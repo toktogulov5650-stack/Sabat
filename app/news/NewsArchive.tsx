@@ -1,14 +1,88 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
-import { newsItems } from "../data/news";
-import { archiveCopy, localizedNews, type Language } from "./content";
+import {
+  apiRequest,
+  formatNewsDate,
+  resolveImageUrl,
+  type Language,
+  type NewsListItem,
+  type NewsPage,
+} from "../lib/api";
+import { archiveCopy } from "./content";
+
+const categories = ["", "events", "initiatives", "stories", "partnership"] as const;
+
+const controlsCopy = {
+  ru: {
+    search: "Поиск",
+    searchPlaceholder: "Название или текст публикации",
+    category: "Категория",
+    apply: "Найти",
+    categoryNames: ["Все категории", "События", "Инициативы", "Истории", "Партнёрство"],
+    loading: "Загружаем публикации…",
+    error: "Не удалось загрузить новости. Попробуйте ещё раз.",
+    empty: "По вашему запросу публикаций не найдено.",
+    retry: "Повторить",
+    previousPage: "Предыдущая страница",
+    nextPage: "Следующая страница",
+    page: (current: number, total: number) => `Страница ${current} из ${total}`,
+  },
+  ky: {
+    search: "Издөө",
+    searchPlaceholder: "Жарыянын аталышы же тексти",
+    category: "Категория",
+    apply: "Издөө",
+    categoryNames: ["Бардык категориялар", "Окуялар", "Демилгелер", "Баяндар", "Өнөктөштүк"],
+    loading: "Жарыялар жүктөлүүдө…",
+    error: "Жаңылыктарды жүктөө мүмкүн болгон жок. Кайра аракет кылыңыз.",
+    empty: "Сурооңуз боюнча жарыя табылган жок.",
+    retry: "Кайталоо",
+    previousPage: "Мурунку барак",
+    nextPage: "Кийинки барак",
+    page: (current: number, total: number) => `${current} / ${total}-барак`,
+  },
+  en: {
+    search: "Search",
+    searchPlaceholder: "Story title or text",
+    category: "Category",
+    apply: "Search",
+    categoryNames: ["All categories", "Events", "Initiatives", "Stories", "Partnerships"],
+    loading: "Loading stories…",
+    error: "We couldn’t load the news. Please try again.",
+    empty: "No stories match your search.",
+    retry: "Try again",
+    previousPage: "Previous page",
+    nextPage: "Next page",
+    page: (current: number, total: number) => `Page ${current} of ${total}`,
+  },
+};
+
+const fallbackTones = ["green", "light", "dark", "mint"];
+
+function NewsImage({ item, className }: { item: NewsListItem; className: string }) {
+  const imageUrl = resolveImageUrl(item.coverImageUrl);
+
+  return (
+    <div className={className} aria-hidden={!imageUrl}>
+      {imageUrl ? <img src={imageUrl} alt="" /> : null}
+    </div>
+  );
+}
 
 export function NewsArchive() {
   const [language, setLanguage] = useState<Language>("ru");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [newsPage, setNewsPage] = useState<NewsPage | null>(null);
+  const [searchInput, setSearchInput] = useState("");
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState<(typeof categories)[number]>("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [requestVersion, setRequestVersion] = useState(0);
 
   useEffect(() => {
     const savedLanguage = window.localStorage.getItem("sabat-language") as Language | null;
@@ -19,19 +93,58 @@ export function NewsArchive() {
 
     const handleLanguageChange = (event: Event) => {
       setLanguage((event as CustomEvent<Language>).detail);
+      setCurrentPage(1);
     };
 
     window.addEventListener("sabat-language-change", handleLanguageChange);
     return () => window.removeEventListener("sabat-language-change", handleLanguageChange);
   }, []);
 
+  useEffect(() => {
+    const controller = new AbortController();
+    const query = new URLSearchParams({
+      lang: language,
+      page: String(currentPage),
+      pageSize: "12",
+    });
+
+    if (search) query.set("search", search);
+    if (category) query.set("category", category);
+
+    async function loadNews() {
+      setIsLoading(true);
+      setError(false);
+
+      try {
+        const result = await apiRequest<NewsPage>(`/api/news?${query.toString()}`, {
+          cache: "no-store",
+          signal: controller.signal,
+        });
+        setNewsPage(result);
+      } catch (requestError) {
+        if (requestError instanceof DOMException && requestError.name === "AbortError") return;
+        setNewsPage(null);
+        setError(true);
+      } finally {
+        if (!controller.signal.aborted) setIsLoading(false);
+      }
+    }
+
+    void loadNews();
+    return () => controller.abort();
+  }, [language, currentPage, search, category, requestVersion]);
+
+  function handleSearch(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setCurrentPage(1);
+    setSearch(searchInput.trim());
+  }
+
   const page = archiveCopy[language];
-  const stories = newsItems.map((item) => ({
-    ...item,
-    ...localizedNews[language][item.slug],
-  }));
+  const controls = controlsCopy[language];
+  const stories = newsPage?.items ?? [];
   const showcase = stories.slice(0, 3);
-  const latest = stories.slice(1);
+  const latest = stories.slice(3);
 
   return (
     <>
@@ -47,51 +160,112 @@ export function NewsArchive() {
           </div>
         </section>
 
-        <section className="news-showcase" aria-label={page.latest}>
-          <div className="container news-grid news-showcase-grid">
-            {showcase.map((item, index) => (
-              <Link
-                className={`news-card news-showcase-card ${index === 0 ? "featured" : "compact"}`}
-                href={`/news/${item.slug}`}
-                id={`news-showcase-${index + 1}`}
-                key={item.slug}
+        <section className="news-filter-section" aria-label={controls.search}>
+          <form className="container news-filter" onSubmit={handleSearch}>
+            <label>
+              <span>{controls.search}</span>
+              <input
+                type="search"
+                value={searchInput}
+                onChange={(event) => setSearchInput(event.target.value)}
+                placeholder={controls.searchPlaceholder}
+              />
+            </label>
+            <label>
+              <span>{controls.category}</span>
+              <select
+                value={category}
+                onChange={(event) => {
+                  setCategory(event.target.value as (typeof categories)[number]);
+                  setCurrentPage(1);
+                }}
               >
-                <div className="news-image-placeholder" aria-hidden="true" />
-                <h3>{item.title}</h3>
-                <time>{item.date}</time>
-              </Link>
-            ))}
-          </div>
-
-          <div className="news-controls">
-            <a href="#news-showcase-2" aria-label={page.previous}>‹</a>
-            <a href="#news-showcase-3" aria-label={page.next}>›</a>
-          </div>
+                {categories.map((value, index) => (
+                  <option value={value} key={value || "all"}>{controls.categoryNames[index]}</option>
+                ))}
+              </select>
+            </label>
+            <button type="submit">{controls.apply}</button>
+          </form>
         </section>
 
-        <section className="news-latest" aria-labelledby="latest-news-title">
-          <div className="container">
-            <div className="news-latest-heading">
-              <h2 id="latest-news-title">{page.latest}</h2>
-            </div>
-
-            <div className="news-editorial-list">
-              {latest.map((item) => (
-                <Link className="news-editorial-row" href={`/news/${item.slug}`} key={item.slug}>
-                  <div className={`news-editorial-thumb tone-${item.tone}`} aria-hidden="true" />
-                  <div className="news-editorial-row-copy">
-                    <div className="news-editorial-meta">
-                      <time>{item.date}</time>
-                    </div>
+        {isLoading ? (
+          <p className="container news-archive-status" role="status">{controls.loading}</p>
+        ) : error ? (
+          <div className="container news-archive-status" role="alert">
+            <p>{controls.error}</p>
+            <button type="button" onClick={() => setRequestVersion((value) => value + 1)}>{controls.retry}</button>
+          </div>
+        ) : stories.length === 0 ? (
+          <p className="container news-archive-status">{controls.empty}</p>
+        ) : (
+          <>
+            <section className="news-showcase" aria-label={page.latest}>
+              <div className="container news-grid news-showcase-grid">
+                {showcase.map((item, index) => (
+                  <Link
+                    className={`news-card news-showcase-card ${index === 0 ? "featured" : "compact"}`}
+                    href={`/news/${item.slug}`}
+                    id={`news-showcase-${index + 1}`}
+                    key={item.id}
+                  >
+                    <NewsImage item={item} className="news-image-placeholder" />
                     <h3>{item.title}</h3>
-                    <p>{item.excerpt}</p>
+                    <time dateTime={item.publishedAt}>{formatNewsDate(item.publishedAt, language)}</time>
+                  </Link>
+                ))}
+              </div>
+            </section>
+
+            {latest.length > 0 ? (
+              <section className="news-latest" aria-labelledby="latest-news-title">
+                <div className="container">
+                  <div className="news-latest-heading">
+                    <h2 id="latest-news-title">{page.latest}</h2>
                   </div>
-                  <span className="news-editorial-arrow" aria-hidden="true">↗</span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
+                  <div className="news-editorial-list">
+                    {latest.map((item, index) => (
+                      <Link className="news-editorial-row" href={`/news/${item.slug}`} key={item.id}>
+                        <NewsImage item={item} className={`news-editorial-thumb tone-${fallbackTones[index % fallbackTones.length]}`} />
+                        <div className="news-editorial-row-copy">
+                          <div className="news-editorial-meta">
+                            <time dateTime={item.publishedAt}>{formatNewsDate(item.publishedAt, language)}</time>
+                            <span>{item.category}</span>
+                          </div>
+                          <h3>{item.title}</h3>
+                          <p>{item.excerpt}</p>
+                        </div>
+                        <span className="news-editorial-arrow" aria-hidden="true">↗</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            ) : null}
+
+            {newsPage && newsPage.totalPages > 1 ? (
+              <nav className="container news-pagination" aria-label={controls.page(newsPage.page, newsPage.totalPages)}>
+                <button
+                  type="button"
+                  onClick={() => setCurrentPage((value) => Math.max(1, value - 1))}
+                  disabled={newsPage.page <= 1}
+                  aria-label={controls.previousPage}
+                >
+                  ←
+                </button>
+                <span>{controls.page(newsPage.page, newsPage.totalPages)}</span>
+                <button
+                  type="button"
+                  onClick={() => setCurrentPage((value) => Math.min(newsPage.totalPages, value + 1))}
+                  disabled={newsPage.page >= newsPage.totalPages}
+                  aria-label={controls.nextPage}
+                >
+                  →
+                </button>
+              </nav>
+            ) : null}
+          </>
+        )}
       </main>
       <Footer />
     </>

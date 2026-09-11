@@ -30,7 +30,11 @@ const copy: Record<Language, ContactsCopy> = {
       message: "Сообщение",
       messagePlaceholder: "Опишите идею, вопрос или предложение",
       submit: "Отправить сообщение",
-      mailSubject: "Сообщение с сайта Sabat",
+      submitting: "Отправляем…",
+      success: "Спасибо! Ваше сообщение отправлено.",
+      validationError: "Проверьте заполненные поля.",
+      rateLimitError: "Слишком много попыток. Попробуйте немного позже.",
+      serverError: "Не удалось отправить сообщение. Попробуйте ещё раз.",
     },
   },
   ky: {
@@ -48,7 +52,11 @@ const copy: Record<Language, ContactsCopy> = {
       message: "Билдирүү",
       messagePlaceholder: "Идеяңызды, сурооңузду же сунушуңузду жазыңыз",
       submit: "Билдирүү жөнөтүү",
-      mailSubject: "Sabat сайтынан билдирүү",
+      submitting: "Жөнөтүлүүдө…",
+      success: "Рахмат! Билдирүүңүз жөнөтүлдү.",
+      validationError: "Толтурулган талааларды текшериңиз.",
+      rateLimitError: "Өтө көп аракет болду. Бир аздан кийин кайталап көрүңүз.",
+      serverError: "Билдирүүнү жөнөтүү мүмкүн болгон жок. Кайра аракет кылыңыз.",
     },
   },
   en: {
@@ -66,7 +74,11 @@ const copy: Record<Language, ContactsCopy> = {
       message: "Message",
       messagePlaceholder: "Describe your idea, question or proposal",
       submit: "Send message",
-      mailSubject: "Message from the Sabat website",
+      submitting: "Sending…",
+      success: "Thank you! Your message has been sent.",
+      validationError: "Please check the fields you completed.",
+      rateLimitError: "Too many attempts. Please try again a little later.",
+      serverError: "We couldn’t send your message. Please try again.",
     },
   },
 };
@@ -106,7 +118,7 @@ export function ContactsContent() {
               <span className="contact-brief-eyebrow">{content.panelEyebrow}</span>
               <h2>{content.panelTitle}</h2>
             </aside>
-            <ContactForm copy={content.form} />
+            <ContactForm copy={content.form} language={language} />
           </div>
         </div>
       </section>

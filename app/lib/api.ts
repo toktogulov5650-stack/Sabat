@@ -1,0 +1,105 @@
+export type Language = "ru" | "ky" | "en";
+
+export type NewsListItem = {
+  id: string;
+  slug: string;
+  category: string;
+  author: string | null;
+  coverImageUrl: string | null;
+  title: string;
+  excerpt: string;
+  publishedAt: string;
+};
+
+export type NewsPage = {
+  items: NewsListItem[];
+  page: number;
+  pageSize: number;
+  totalCount: number;
+  totalPages: number;
+};
+
+export type NewsDetails = NewsListItem & {
+  content: string;
+};
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "");
+
+const defaultErrorMessages: Record<number, string> = {
+  400: "The request contains invalid data.",
+  404: "The requested resource was not found.",
+  429: "Too many requests. Please try again later.",
+  500: "The server is temporarily unavailable.",
+};
+
+export class ApiError extends Error {
+  constructor(
+    public readonly status: number,
+    message: string,
+  ) {
+    super(message);
+    this.name = "ApiError";
+  }
+}
+
+export async function apiRequest<T>(
+  path: string,
+  options: RequestInit = {},
+): Promise<T> {
+  if (!API_URL) {
+    throw new ApiError(500, "The public API address is not configured.");
+  }
+
+  const response = await fetch(`${API_URL}${path}`, {
+    ...options,
+    headers: {
+      "Content-Type": "application/json",
+      ...options.headers,
+    },
+  });
+
+  if (!response.ok) {
+    let message = defaultErrorMessages[response.status] ?? "API request failed.";
+
+    try {
+      const payload = (await response.json()) as {
+        error?: string;
+        message?: string;
+        title?: string;
+      };
+      message = payload.message ?? payload.error ?? payload.title ?? message;
+    } catch {
+      // Some error responses intentionally have no JSON body.
+    }
+
+    throw new ApiError(response.status, message);
+  }
+
+  if (response.status === 204) {
+    return undefined as T;
+  }
+
+  return response.json() as Promise<T>;
+}
+
+const dateLocales: Record<Language, string> = {
+  ru: "ru-RU",
+  ky: "ky-KG",
+  en: "en-US",
+};
+
+export function formatNewsDate(date: string, language: Language) {
+  return new Intl.DateTimeFormat(dateLocales[language], {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(date));
+}
+
+export function resolveImageUrl(url: string | null) {
+  if (!url) return null;
+  if (/^https?:\/\//i.test(url)) return url;
+  if (!API_URL) return null;
+
+  return `${API_URL}${url.startsWith("/") ? url : `/${url}`}`;
+}

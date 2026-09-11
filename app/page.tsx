@@ -1,11 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
-import { newsItems } from "./data/news";
-
-type Language = "ru" | "ky" | "en";
+import {
+  apiRequest,
+  formatNewsDate,
+  resolveImageUrl,
+  type Language,
+  type NewsListItem,
+  type NewsPage,
+} from "./lib/api";
 
 const pageContent = {
   ru: {
@@ -37,6 +43,9 @@ const pageContent = {
     ),
 
     news: "Новости",
+    newsLoading: "Загружаем новости…",
+    newsError: "Не удалось загрузить новости. Попробуйте обновить страницу.",
+    newsEmpty: "Пока нет опубликованных новостей.",
     about: "О нас",
 
     previousNews: "Предыдущая новость",
@@ -71,6 +80,9 @@ const pageContent = {
     ),
 
     news: "Жаңылыктар",
+    newsLoading: "Жаңылыктар жүктөлүүдө…",
+    newsError: "Жаңылыктарды жүктөө мүмкүн болгон жок. Баракты жаңыртып көрүңүз.",
+    newsEmpty: "Азырынча жарыяланган жаңылыктар жок.",
     about: "Биз жөнүндө",
 
     previousNews: "Мурунку жаңылык",
@@ -105,6 +117,9 @@ const pageContent = {
     ),
 
     news: "News",
+    newsLoading: "Loading news…",
+    newsError: "We couldn’t load the news. Please refresh the page.",
+    newsEmpty: "There are no published stories yet.",
     about: "About us",
 
     previousNews: "Previous news",
@@ -168,24 +183,11 @@ const values = {
   ],
 };
 
-const newsTitles = {
-  ru: newsItems.map((item) => item.title),
-
-  ky: [
-    "Sabat долбоорлорунун жаңы сезону",
-    "Sabat коомчулугунун ачык жолугушуусу",
-    "Эмне үчүн чоң өзгөрүүлөр кичине кадамдардан башталат",
-  ],
-
-  en: [
-    "A new season of Sabat projects",
-    "Open meeting of the Sabat community",
-    "Why big changes begin with small steps",
-  ],
-};
-
 export default function Home() {
   const [language, setLanguage] = useState<Language>("ru");
+  const [news, setNews] = useState<NewsListItem[]>([]);
+  const [newsLoading, setNewsLoading] = useState(true);
+  const [newsError, setNewsError] = useState(false);
 
   const content = pageContent[language];
 
@@ -220,6 +222,32 @@ export default function Home() {
       );
     };
   }, []);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadNews() {
+      setNewsLoading(true);
+      setNewsError(false);
+
+      try {
+        const result = await apiRequest<NewsPage>(
+          `/api/news/latest?lang=${language}&take=3`,
+          { cache: "no-store", signal: controller.signal },
+        );
+        setNews(result.items);
+      } catch (error) {
+        if (error instanceof DOMException && error.name === "AbortError") return;
+        setNews([]);
+        setNewsError(true);
+      } finally {
+        if (!controller.signal.aborted) setNewsLoading(false);
+      }
+    }
+
+    void loadNews();
+    return () => controller.abort();
+  }, [language]);
 
   return (
     <>
@@ -298,35 +326,44 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="container news-grid">
+          {newsLoading ? (
+            <p className="container news-status" role="status">{content.newsLoading}</p>
+          ) : newsError ? (
+            <p className="container news-status news-status-error" role="alert">{content.newsError}</p>
+          ) : news.length === 0 ? (
+            <p className="container news-status">{content.newsEmpty}</p>
+          ) : (
+            <div className="container news-grid">
+            {news.map((item, index) => {
+              const imageUrl = resolveImageUrl(item.coverImageUrl);
 
-            {newsItems.slice(0, 3).map((item, index) => (
-              <article
+              return (
+              <Link
                 className={`news-card ${
                   index === 0 ? "featured" : "compact"
                 }`}
+                href={`/news/${item.slug}`}
                 id={`news-card-${index + 1}`}
                 key={item.slug}
               >
-                <div
-                  className="news-image-placeholder"
-                  aria-hidden="true"
-                />
+                <div className="news-image-placeholder" aria-hidden={!imageUrl}>
+                  {imageUrl ? <img src={imageUrl} alt="" /> : null}
+                </div>
 
                 <h3>
-                  {newsTitles[language][index]}
+                  {item.title}
                 </h3>
 
-                <time>
-                  {item.date}
+                <time dateTime={item.publishedAt}>
+                  {formatNewsDate(item.publishedAt, language)}
                 </time>
 
-              </article>
-            ))}
+              </Link>
+            )})}
+            </div>
+          )}
 
-          </div>
-
-          <div className="news-controls">
+          {!newsLoading && !newsError && news.length > 1 ? <div className="news-controls">
 
             <a
               href="#news-card-2"
@@ -342,7 +379,7 @@ export default function Home() {
               ›
             </a>
 
-          </div>
+          </div> : null}
 
         </section>
 
