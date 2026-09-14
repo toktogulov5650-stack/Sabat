@@ -6,7 +6,6 @@ import { ContactForm, type ContactFormCopy } from "../components/ContactForm";
 type Language = "ru" | "ky" | "en";
 
 type ContactsCopy = {
-  eyebrow: string;
   title: string;
   intro: string;
   panelEyebrow: string;
@@ -16,7 +15,6 @@ type ContactsCopy = {
 
 const copy: Record<Language, ContactsCopy> = {
   ru: {
-    eyebrow: "Контакты",
     title: "Хорошие идеи начинаются с разговора.",
     intro: "Расскажите нам о своей инициативе, предложите сотрудничество или задайте вопрос. Мы внимательно читаем каждое сообщение.",
     panelEyebrow: "Связаться с Sabat",
@@ -38,7 +36,6 @@ const copy: Record<Language, ContactsCopy> = {
     },
   },
   ky: {
-    eyebrow: "Байланыш",
     title: "Жакшы идеялар баарлашуудан башталат.",
     intro: "Демилгеңиз тууралуу айтып бериңиз, кызматташууну сунуштаңыз же суроо бериңиз. Биз ар бир билдирүүнү кунт коюп окуйбуз.",
     panelEyebrow: "Sabat менен байланышуу",
@@ -60,7 +57,6 @@ const copy: Record<Language, ContactsCopy> = {
     },
   },
   en: {
-    eyebrow: "Contacts",
     title: "Good ideas begin with a conversation.",
     intro: "Tell us about your initiative, propose a partnership or ask a question. We read every message carefully.",
     panelEyebrow: "Contact Sabat",
@@ -102,7 +98,6 @@ export function ContactsContent() {
       <section className="contact-editorial-hero">
         <div className="container contact-hero-grid">
           <div>
-            <span className="contact-eyebrow">{content.eyebrow}</span>
             <h1>{content.title}</h1>
           </div>
           <div className="contact-hero-intro">

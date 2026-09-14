@@ -8,7 +8,6 @@ type Language = "ru" | "ky" | "en";
 
 const content = {
   ru: {
-    pageTitle: "О фонде",
     title: "Развиваем человека и специалиста, чтобы знания приносили пользу обществу.",
     intro:
       "«Сабат» — общественный образовательный фонд. Через образовательные и социальные программы мы помогаем молодым людям формировать характер, осваивать профессию и направлять знания на благо общества.",
@@ -45,7 +44,6 @@ const content = {
     contact: "Предложить сотрудничество",
   },
   ky: {
-    pageTitle: "Фонд жөнүндө",
     title: "Адамды жана адисти өнүктүрүп, билимди коомдун пайдасына багыттайбыз.",
     intro:
       "«Сабат» — билим берүүчү коомдук фонд. Билим берүү жана социалдык программалар аркылуу жаштардын мүнөзүн калыптандырууга, кесипти өздөштүрүүгө жана билимин коомдун пайдасына колдонууга жардам беребиз.",
@@ -81,7 +79,6 @@ const content = {
     contact: "Кызматташууну сунуштоо",
   },
   en: {
-    pageTitle: "About the foundation",
     title: "We develop people and professionals so knowledge can create value for society.",
     intro:
       "Sabat is a public education foundation. Through educational and social programmes, we help young people build character, master a profession and use their knowledge for the benefit of society.",
@@ -150,7 +147,6 @@ export function AboutContent() {
       <main id="main-content" className="about-minimal">
         <section className="about-minimal-hero">
           <div className="container">
-            <span className="about-minimal-page-title">{page.pageTitle}</span>
             <div className="about-minimal-hero-grid">
               <div>
                 <h1>{page.title}</h1>

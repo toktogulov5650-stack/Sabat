@@ -1,6 +1,5 @@
 export const archiveCopy = {
   ru: {
-    pageTitle: "Новости",
     title: "События, истории и идеи сообщества Sabat.",
     intro: "Рассказываем о проектах фонда, людях, которые их создают, и практиках, помогающих знаниям приносить пользу обществу.",
     latest: "Последние публикации",
@@ -11,7 +10,6 @@ export const archiveCopy = {
     next: "Следующая новость",
   },
   ky: {
-    pageTitle: "Жаңылыктар",
     title: "Sabat коомчулугунун окуялары, баяндары жана идеялары.",
     intro: "Фонддун долбоорлору, аларды түзгөн адамдар жана билимди коомдун пайдасына багыттаган тажрыйбалар жөнүндө айтып беребиз.",
     latest: "Акыркы жарыялар",
@@ -22,7 +20,6 @@ export const archiveCopy = {
     next: "Кийинки жаңылык",
   },
   en: {
-    pageTitle: "News",
     title: "Stories, events and ideas from the Sabat community.",
     intro: "Updates on the foundation’s projects, the people behind them and the practices that help knowledge create value for society.",
     latest: "Latest stories",

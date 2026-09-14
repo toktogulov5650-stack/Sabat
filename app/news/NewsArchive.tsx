@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import {
@@ -14,15 +14,8 @@ import {
 } from "../lib/api";
 import { archiveCopy } from "./content";
 
-const categories = ["", "events", "initiatives", "stories", "partnership"] as const;
-
 const controlsCopy = {
   ru: {
-    search: "Поиск",
-    searchPlaceholder: "Название или текст публикации",
-    category: "Категория",
-    apply: "Найти",
-    categoryNames: ["Все категории", "События", "Инициативы", "Истории", "Партнёрство"],
     loading: "Загружаем публикации…",
     error: "Не удалось загрузить новости. Попробуйте ещё раз.",
     empty: "По вашему запросу публикаций не найдено.",
@@ -32,11 +25,6 @@ const controlsCopy = {
     page: (current: number, total: number) => `Страница ${current} из ${total}`,
   },
   ky: {
-    search: "Издөө",
-    searchPlaceholder: "Жарыянын аталышы же тексти",
-    category: "Категория",
-    apply: "Издөө",
-    categoryNames: ["Бардык категориялар", "Окуялар", "Демилгелер", "Баяндар", "Өнөктөштүк"],
     loading: "Жарыялар жүктөлүүдө…",
     error: "Жаңылыктарды жүктөө мүмкүн болгон жок. Кайра аракет кылыңыз.",
     empty: "Сурооңуз боюнча жарыя табылган жок.",
@@ -46,11 +34,6 @@ const controlsCopy = {
     page: (current: number, total: number) => `${current} / ${total}-барак`,
   },
   en: {
-    search: "Search",
-    searchPlaceholder: "Story title or text",
-    category: "Category",
-    apply: "Search",
-    categoryNames: ["All categories", "Events", "Initiatives", "Stories", "Partnerships"],
     loading: "Loading stories…",
     error: "We couldn’t load the news. Please try again.",
     empty: "No stories match your search.",
@@ -77,9 +60,6 @@ export function NewsArchive() {
   const [language, setLanguage] = useState<Language>("ru");
   const [currentPage, setCurrentPage] = useState(1);
   const [newsPage, setNewsPage] = useState<NewsPage | null>(null);
-  const [searchInput, setSearchInput] = useState("");
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState<(typeof categories)[number]>("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const [requestVersion, setRequestVersion] = useState(0);
@@ -108,9 +88,6 @@ export function NewsArchive() {
       pageSize: "12",
     });
 
-    if (search) query.set("search", search);
-    if (category) query.set("category", category);
-
     async function loadNews() {
       setIsLoading(true);
       setError(false);
@@ -132,13 +109,7 @@ export function NewsArchive() {
 
     void loadNews();
     return () => controller.abort();
-  }, [language, currentPage, search, category, requestVersion]);
-
-  function handleSearch(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setCurrentPage(1);
-    setSearch(searchInput.trim());
-  }
+  }, [language, currentPage, requestVersion]);
 
   const page = archiveCopy[language];
   const controls = controlsCopy[language];
@@ -152,41 +123,11 @@ export function NewsArchive() {
       <main id="main-content" className="news-editorial">
         <section className="news-editorial-hero">
           <div className="container">
-            <span className="news-editorial-page-title">{page.pageTitle}</span>
             <div className="news-editorial-intro">
               <h1>{page.title}</h1>
               <p>{page.intro}</p>
             </div>
           </div>
-        </section>
-
-        <section className="news-filter-section" aria-label={controls.search}>
-          <form className="container news-filter" onSubmit={handleSearch}>
-            <label>
-              <span>{controls.search}</span>
-              <input
-                type="search"
-                value={searchInput}
-                onChange={(event) => setSearchInput(event.target.value)}
-                placeholder={controls.searchPlaceholder}
-              />
-            </label>
-            <label>
-              <span>{controls.category}</span>
-              <select
-                value={category}
-                onChange={(event) => {
-                  setCategory(event.target.value as (typeof categories)[number]);
-                  setCurrentPage(1);
-                }}
-              >
-                {categories.map((value, index) => (
-                  <option value={value} key={value || "all"}>{controls.categoryNames[index]}</option>
-                ))}
-              </select>
-            </label>
-            <button type="submit">{controls.apply}</button>
-          </form>
         </section>
 
         {isLoading ? (
@@ -230,7 +171,6 @@ export function NewsArchive() {
                         <div className="news-editorial-row-copy">
                           <div className="news-editorial-meta">
                             <time dateTime={item.publishedAt}>{formatNewsDate(item.publishedAt, language)}</time>
-                            <span>{item.category}</span>
                           </div>
                           <h3>{item.title}</h3>
                           <p>{item.excerpt}</p>

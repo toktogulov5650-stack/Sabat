@@ -24,6 +24,7 @@ export type NewsDetails = NewsListItem & {
 };
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "");
+const API_PROXY_PATH = "/api/backend";
 
 const defaultErrorMessages: Record<number, string> = {
   400: "The request contains invalid data.",
@@ -46,11 +47,7 @@ export async function apiRequest<T>(
   path: string,
   options: RequestInit = {},
 ): Promise<T> {
-  if (!API_URL) {
-    throw new ApiError(500, "The public API address is not configured.");
-  }
-
-  const response = await fetch(`${API_URL}${path}`, {
+  const response = await fetch(`${API_PROXY_PATH}${path}`, {
     ...options,
     headers: {
       "Content-Type": "application/json",

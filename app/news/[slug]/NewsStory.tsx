@@ -160,7 +160,6 @@ export function NewsStory({ slug }: { slug: string }) {
                 </div>
                 <div className="news-story-paper-copy">
                   <div className="news-editorial-meta">
-                    <span>{story.category}</span>
                     {story.author ? <span>{story.author}</span> : null}
                   </div>
                   <h1>{story.title}</h1>

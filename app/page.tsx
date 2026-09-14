@@ -15,7 +15,6 @@ import {
 
 const pageContent = {
   ru: {
-    foundation: "Общественный образовательный фонд «Сабат»",
     hero: (
       <>
         Сначала — достойный человек.
@@ -53,7 +52,6 @@ const pageContent = {
   },
 
   ky: {
-    foundation: "«Сабат» билим берүүчү коомдук фонду",
     hero: (
       <>
         Биринчи — мыкты адам.
@@ -90,7 +88,6 @@ const pageContent = {
   },
 
   en: {
-    foundation: "Sabat Public Education Foundation",
     hero: (
       <>
         First, a person of character.
@@ -264,10 +261,6 @@ export default function Home() {
             <div className="main-hero-card">
 
               <div className="main-hero-content">
-                <span className="main-hero-label">
-                  {content.foundation}
-                </span>
-
                 <h1>
                   {content.hero}
                 </h1>
