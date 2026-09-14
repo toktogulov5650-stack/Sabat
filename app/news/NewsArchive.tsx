@@ -22,6 +22,8 @@ const controlsCopy = {
     retry: "Повторить",
     previousPage: "Предыдущая страница",
     nextPage: "Следующая страница",
+    previousStory: "Предыдущая новость",
+    nextStory: "Следующая новость",
     page: (current: number, total: number) => `Страница ${current} из ${total}`,
   },
   ky: {
@@ -31,6 +33,8 @@ const controlsCopy = {
     retry: "Кайталоо",
     previousPage: "Мурунку барак",
     nextPage: "Кийинки барак",
+    previousStory: "Мурунку жаңылык",
+    nextStory: "Кийинки жаңылык",
     page: (current: number, total: number) => `${current} / ${total}-барак`,
   },
   en: {
@@ -40,6 +44,8 @@ const controlsCopy = {
     retry: "Try again",
     previousPage: "Previous page",
     nextPage: "Next page",
+    previousStory: "Previous story",
+    nextStory: "Next story",
     page: (current: number, total: number) => `Page ${current} of ${total}`,
   },
 };
@@ -63,6 +69,7 @@ export function NewsArchive() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const [requestVersion, setRequestVersion] = useState(0);
+  const [showcaseOffset, setShowcaseOffset] = useState(0);
 
   useEffect(() => {
     const savedLanguage = window.localStorage.getItem("sabat-language") as Language | null;
@@ -114,7 +121,10 @@ export function NewsArchive() {
   const page = archiveCopy[language];
   const controls = controlsCopy[language];
   const stories = newsPage?.items ?? [];
-  const showcase = stories.slice(0, 3);
+  const showcaseSource = stories.slice(0, 3);
+  const showcase = showcaseSource.map(
+    (_, index) => showcaseSource[(index + showcaseOffset) % showcaseSource.length],
+  );
   const latest = stories.slice(3);
 
   return (
@@ -156,6 +166,31 @@ export function NewsArchive() {
                   </Link>
                 ))}
               </div>
+              {showcaseSource.length > 1 ? (
+                <div className="news-showcase-controls">
+                  <button
+                    type="button"
+                    aria-label={controls.previousStory}
+                    onClick={() =>
+                      setShowcaseOffset(
+                        (value) =>
+                          (value - 1 + showcaseSource.length) % showcaseSource.length,
+                      )
+                    }
+                  >
+                    ‹
+                  </button>
+                  <button
+                    type="button"
+                    aria-label={controls.nextStory}
+                    onClick={() =>
+                      setShowcaseOffset((value) => (value + 1) % showcaseSource.length)
+                    }
+                  >
+                    ›
+                  </button>
+                </div>
+              ) : null}
             </section>
 
             {latest.length > 0 ? (

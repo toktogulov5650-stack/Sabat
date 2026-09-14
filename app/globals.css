@@ -1339,6 +1339,7 @@ p {
   border-radius: 50%;
 
   background: #fff;
+  color: var(--ink);
 
   place-items: center;
 
@@ -1348,12 +1349,21 @@ p {
 
   transition:
     background 0.2s,
-    border-color 0.2s;
+    border-color 0.2s,
+    color 0.2s,
+    transform 0.2s;
 }
 
-.news-controls a:hover {
-  border-color: #aeb3ae;
-  background: #f3f4f3;
+.news-controls a:hover,
+.news-controls a:focus-visible {
+  border-color: var(--green);
+  background: var(--green);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.news-controls a:active {
+  transform: translateY(0) scale(0.96);
 }
 
 .news-grid {
@@ -4912,6 +4922,37 @@ p {
 
 .news-showcase-grid {
   padding-top: 64px;
+}
+
+.news-showcase-controls {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 0;
+}
+
+.news-showcase-controls button {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  padding: 0 0 3px;
+  border: 1px solid #d7dcd7;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--ink);
+  font-size: 28px;
+  font-weight: 350;
+  line-height: 1;
+  cursor: pointer;
+  place-items: center;
+  transition: border-color 180ms ease, background 180ms ease, color 180ms ease;
+}
+
+.news-showcase-controls button:hover,
+.news-showcase-controls button:focus-visible {
+  border-color: var(--green);
+  background: var(--green);
+  color: #fff;
 }
 
 .news-showcase-card {
