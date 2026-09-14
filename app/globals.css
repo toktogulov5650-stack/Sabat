@@ -2161,16 +2161,8 @@ p {
   object-fit: cover;
 }
 
-.about-minimal-media-portrait {
-  width: min(100%, 435px);
-  min-height: 0;
-  aspect-ratio: 3 / 4;
-  justify-self: center;
-  background: #ece9e2;
-}
-
-.about-minimal-media-portrait img {
-  object-fit: contain;
+.about-minimal-media-work img {
+  object-position: center 55%;
 }
 
 .about-minimal-goal {
@@ -2673,10 +2665,6 @@ p {
   .about-minimal-media {
     min-height: 250px;
     border-radius: 14px;
-  }
-
-  .about-minimal-media-portrait {
-    min-height: 0;
   }
 
   .about-minimal-stat {
@@ -4438,6 +4426,11 @@ p {
   align-self: end;
 }
 
+.about-magazine-community-copy > p {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
 .about-magazine-community-copy > small {
   display: block;
   max-width: 260px;
@@ -4497,6 +4490,8 @@ p {
 
 .about-magazine-goal-copy > p {
   margin-top: 28px;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .about-magazine-number {

@@ -192,9 +192,9 @@ export function AboutContent() {
               <h2>{page.workTitle}</h2>
               <p>{page.workText}</p>
             </div>
-            <div className="about-minimal-media about-minimal-media-portrait">
+            <div className="about-minimal-media about-minimal-media-work">
               <Image
-                src="/about-what-we-do.png"
+                src="/about-what-we-do.jpg"
                 alt={page.workImageAlt}
                 fill
                 sizes="(max-width: 850px) 100vw, 55vw"
