@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
@@ -24,7 +25,7 @@ const pageContent = {
     ),
     heroDescription:
       "Помогаем молодым людям укреплять характер, осваивать профессию и превращать знания в пользу для общества.",
-    photoPlaceholder: "Место для фото",
+    contactCta: "Связаться",
 
     mission: (
       <>
@@ -60,7 +61,7 @@ const pageContent = {
     ),
     heroDescription:
       "Жаштардын мүнөзүн бекемдеп, кесиптик чеберчилигин өстүрүп, билимин коомго пайда келтирген күчкө айлантууга жардам беребиз.",
-    photoPlaceholder: "Сүрөт үчүн орун",
+    contactCta: "Байланышуу",
 
     mission: (
       <>
@@ -96,7 +97,7 @@ const pageContent = {
     ),
     heroDescription:
       "We help young people build character, master their profession and turn knowledge into lasting value for society.",
-    photoPlaceholder: "Photo placeholder",
+    contactCta: "Contact us",
 
     mission: (
       <>
@@ -179,6 +180,33 @@ const values = {
     },
   ],
 };
+
+const valueImages = [
+  {
+    src: "/about-who-we-are.jpg",
+    alt: {
+      ru: "Книги и рабочая тетрадь на столе",
+      ky: "Стол үстүндөгү китептер жана жумушчу дептер",
+      en: "Books and a notebook on a study table",
+    },
+  },
+  {
+    src: "/about-our-approach.jpg",
+    alt: {
+      ru: "Молодой техник работает с учебным оборудованием",
+      ky: "Жаш техник окуу жабдуулары менен иштеп жатат",
+      en: "A young technician working with training equipment",
+    },
+  },
+  {
+    src: "/about-social-impact.jpg",
+    alt: {
+      ru: "Выпускник поднимает диплом перед учебным зданием",
+      ky: "Бүтүрүүчү окуу жайдын алдында дипломун көтөрүп турат",
+      en: "A graduate raising a diploma in front of an educational building",
+    },
+  },
+] as const;
 
 export default function Home() {
   const [language, setLanguage] = useState<Language>("ru");
@@ -268,15 +296,10 @@ export default function Home() {
                 <p>
                   {content.heroDescription}
                 </p>
-              </div>
 
-              <div
-                className="main-hero-photo"
-                aria-hidden="true"
-              >
-                <span>
-                  {content.photoPlaceholder}
-                </span>
+                <Link className="main-hero-action" href="/contacts">
+                  {content.contactCta}
+                </Link>
               </div>
 
             </div>
@@ -399,10 +422,14 @@ export default function Home() {
                 key={value.title}
               >
 
-                <div
-                  className="value-image-placeholder"
-                  aria-hidden="true"
-                />
+                <div className="value-image">
+                  <Image
+                    src={valueImages[index].src}
+                    alt={valueImages[index].alt[language]}
+                    fill
+                    sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 1200px) 50vw, 570px"
+                  />
+                </div>
 
                 <div className="value-copy">
 

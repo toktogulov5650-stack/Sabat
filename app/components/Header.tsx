@@ -154,7 +154,8 @@ export function Header() {
               key={item.href}
               href={item.href}
               className={
-                pathname === item.href
+                pathname === item.href ||
+                (item.href !== "/" && pathname.startsWith(`${item.href}/`))
                   ? "active"
                   : ""
               }

@@ -15,8 +15,8 @@ type ContactsCopy = {
 
 const copy: Record<Language, ContactsCopy> = {
   ru: {
-    title: "Хорошие идеи начинаются с разговора.",
-    intro: "Расскажите нам о своей инициативе, предложите сотрудничество или задайте вопрос. Мы внимательно читаем каждое сообщение.",
+    title: "Хорошие идеи начинаются с диалога.",
+    intro: "Расскажите об инициативе, предложите сотрудничество или задайте вопрос. Мы внимательно читаем каждое сообщение и будем рады вместе обсудить следующие шаги.",
     panelEyebrow: "Связаться с Sabat",
     panelTitle: "Мы открыты к диалогу.",
     form: {
@@ -36,8 +36,8 @@ const copy: Record<Language, ContactsCopy> = {
     },
   },
   ky: {
-    title: "Жакшы идеялар баарлашуудан башталат.",
-    intro: "Демилгеңиз тууралуу айтып бериңиз, кызматташууну сунуштаңыз же суроо бериңиз. Биз ар бир билдирүүнү кунт коюп окуйбуз.",
+    title: "Жакшы идеялар диалогдон башталат.",
+    intro: "Демилгеңиз тууралуу айтып, кызматташууну сунуштаңыз же суроо бериңиз. Биз ар бир билдирүүнү кунт коюп окуп, кийинки кадамдарды чогуу талкуулоого даярбыз.",
     panelEyebrow: "Sabat менен байланышуу",
     panelTitle: "Биз баарлашууга ачыкпыз.",
     form: {
@@ -57,8 +57,8 @@ const copy: Record<Language, ContactsCopy> = {
     },
   },
   en: {
-    title: "Good ideas begin with a conversation.",
-    intro: "Tell us about your initiative, propose a partnership or ask a question. We read every message carefully.",
+    title: "Good ideas begin with dialogue.",
+    intro: "Tell us about your initiative, propose a partnership or ask a question. We read every message carefully and would be glad to discuss the next steps together.",
     panelEyebrow: "Contact Sabat",
     panelTitle: "We are open to dialogue.",
     form: {
@@ -106,7 +106,7 @@ export function ContactsContent() {
         </div>
       </section>
 
-      <section className="contact-section">
+      <section className="contact-section" id="contact-form">
         <div className="container">
           <div className="contact-shell">
             <aside className="contact-brief">

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
@@ -8,15 +9,19 @@ type Language = "ru" | "ky" | "en";
 
 const content = {
   ru: {
-    title: "Развиваем человека и специалиста, чтобы знания приносили пользу обществу.",
+    title: "Развиваем человека и специалиста.",
     intro:
-      "«Сабат» — общественный образовательный фонд. Через образовательные и социальные программы мы помогаем молодым людям формировать характер, осваивать профессию и направлять знания на благо общества.",
+      "Помогаем молодым людям развивать характер, осваивать профессию и направлять знания на благо общества. Соединяем личностное развитие с практическими навыками, необходимыми в жизни и работе.",
     philosophyTitle: "Достойный человек — сильный специалист",
     philosophyText:
       "Мы считаем, что профессионализм начинается с человеческих качеств. Поэтому вместе со знаниями и практическими навыками развиваем честность и ответственность — чтобы выпускник хорошо делал своё дело и приносил пользу людям.",
+    philosophyImageAlt:
+      "Наставник помогает ребёнку осваивать ремесло в мастерской",
     workTitle: "Что мы делаем",
     workText:
       "Готовим студентов к выходу на рынок труда, развиваем педагогов и молодых специалистов, помогаем детям выстраивать здоровые отношения с технологиями. Участники получают практический опыт, работают в командах, развивают лидерство и реализуют собственные проекты.",
+    workImageAlt:
+      "Специалист работает над архитектурным макетом в мастерской",
     developmentTitle: "Два года последовательного развития",
     developmentText:
       "Двухлетняя программа выстроена как целостный путь: от базовых знаний, самопознания и личного плана развития — к практике, лидерству и самостоятельному проекту. Каждый этап помогает участнику видеть свой прогресс и осознанно выбирать дальнейшее направление.",
@@ -44,15 +49,19 @@ const content = {
     contact: "Предложить сотрудничество",
   },
   ky: {
-    title: "Адамды жана адисти өнүктүрүп, билимди коомдун пайдасына багыттайбыз.",
+    title: "Адамды жана адисти өнүктүрөбүз.",
     intro:
-      "«Сабат» — билим берүүчү коомдук фонд. Билим берүү жана социалдык программалар аркылуу жаштардын мүнөзүн калыптандырууга, кесипти өздөштүрүүгө жана билимин коомдун пайдасына колдонууга жардам беребиз.",
+      "Жаштардын мүнөзүн калыптандырууга, кесипти өздөштүрүүгө жана билимин коомдун пайдасына колдонууга жардам беребиз. Жеке өнүгүүнү жашоодо жана эмгекте керектүү практикалык көндүмдөр менен айкалыштырабыз.",
     philosophyTitle: "Мыкты адам — мыкты адис",
     philosophyText:
       "Биз кесипкөйлүк адамдык сапаттардан башталат деп ишенебиз. Ошондуктан билим жана практикалык көндүмдөр менен бирге адалдыкты жана жоопкерчиликти өнүктүрөбүз — бүтүрүүчү ишин мыкты аткарып, адамдарга пайда алып келиши үчүн.",
+    philosophyImageAlt:
+      "Насаатчы балага устаканада кол өнөрчүлүктү үйрөнүүгө жардам берип жатат",
     workTitle: "Биз эмне кылабыз",
     workText:
       "Студенттерди эмгек рыногуна даярдап, мугалимдерди жана жаш адистерди өнүктүрөбүз, балдарга технология менен туура мамиле түзүүгө жардам беребиз. Катышуучулар практикадан өтүп, командада иштеп, лидерлик сапаттарын өнүктүрүп жана өз долбоорлорун ишке ашырат.",
+    workImageAlt:
+      "Адис устаканада архитектуралык макеттин үстүндө иштеп жатат",
     developmentTitle: "Эки жылдык ырааттуу өнүгүү",
     developmentText:
       "Эки жылдык программа бирдиктүү жол катары түзүлгөн: негизги билимден, өзүн таануудан жана жеке өнүгүү планынан — практикага, лидерликке жана өз алдынча долбоорго чейин. Ар бир этап катышуучуга өсүшүн көрүп, кийинки багытын аң-сезимдүү тандоого жардам берет.",
@@ -79,15 +88,19 @@ const content = {
     contact: "Кызматташууну сунуштоо",
   },
   en: {
-    title: "We develop people and professionals so knowledge can create value for society.",
+    title: "We develop people and professionals.",
     intro:
-      "Sabat is a public education foundation. Through educational and social programmes, we help young people build character, master a profession and use their knowledge for the benefit of society.",
+      "We help young people build character, master a profession and use their knowledge for the benefit of society. We connect personal growth with practical skills for life and work.",
     philosophyTitle: "Strong character. Capable professional.",
     philosophyText:
       "We believe professionalism begins with character. Alongside knowledge and practical skills, we develop integrity and responsibility so graduates can do their work well and create value for others.",
+    philosophyImageAlt:
+      "A mentor helps a child learn a craft in a workshop",
     workTitle: "What we do",
     workText:
       "We prepare students for the workplace, develop teachers and young professionals, and help children build a healthy relationship with technology. Participants gain practical experience, work in teams, develop leadership and deliver their own projects.",
+    workImageAlt:
+      "A professional works on an architectural model in a studio",
     developmentTitle: "Two years of structured development",
     developmentText:
       "The two-year programme is designed as one coherent journey: from foundational knowledge, self-awareness and a personal growth plan to practice, leadership and an independent project. Each stage helps participants recognise their progress and choose their next direction with purpose.",
@@ -156,13 +169,20 @@ export function AboutContent() {
           </div>
         </section>
 
-        <section className="about-minimal-row">
+        <section className="about-minimal-row" id="about-content">
           <div className="container about-minimal-row-grid">
             <div className="about-minimal-copy">
               <h2>{page.philosophyTitle}</h2>
               <p>{page.philosophyText}</p>
             </div>
-            <div className="about-minimal-media" aria-hidden="true" />
+            <div className="about-minimal-media">
+              <Image
+                src="/about-character-professional.jpg"
+                alt={page.philosophyImageAlt}
+                fill
+                sizes="(max-width: 850px) 100vw, 55vw"
+              />
+            </div>
           </div>
         </section>
 
@@ -172,7 +192,14 @@ export function AboutContent() {
               <h2>{page.workTitle}</h2>
               <p>{page.workText}</p>
             </div>
-            <div className="about-minimal-media" aria-hidden="true" />
+            <div className="about-minimal-media about-minimal-media-portrait">
+              <Image
+                src="/about-what-we-do.png"
+                alt={page.workImageAlt}
+                fill
+                sizes="(max-width: 850px) 100vw, 55vw"
+              />
+            </div>
           </div>
         </section>
 
