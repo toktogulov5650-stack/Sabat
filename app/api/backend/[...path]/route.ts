@@ -1,17 +1,14 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "");
+const API_URL = (
+  process.env.SABAT_API_URL ??
+  process.env.NEXT_PUBLIC_API_URL ??
+  "https://sabat-api-903514828590.us-east1.run.app"
+).replace(/\/$/, "");
 
 type RouteContext = {
   params: Promise<{ path: string[] }>;
 };
 
 async function forwardRequest(request: Request, context: RouteContext) {
-  if (!API_URL) {
-    return Response.json(
-      { message: "The public API address is not configured." },
-      { status: 500 },
-    );
-  }
-
   const { path } = await context.params;
   const incomingUrl = new URL(request.url);
   const targetUrl = new URL(`/${path.map(encodeURIComponent).join("/")}`, API_URL);

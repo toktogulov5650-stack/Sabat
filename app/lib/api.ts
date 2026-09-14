@@ -23,7 +23,10 @@ export type NewsDetails = NewsListItem & {
   content: string;
 };
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "");
+const API_URL = (
+  process.env.NEXT_PUBLIC_API_URL ??
+  "https://sabat-api-903514828590.us-east1.run.app"
+).replace(/\/$/, "");
 const API_PROXY_PATH = "/api/backend";
 
 const defaultErrorMessages: Record<number, string> = {
