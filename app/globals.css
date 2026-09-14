@@ -4812,7 +4812,8 @@ p {
 }
 
 .about-magazine-number {
-  align-self: start;
+  align-self: center;
+  justify-self: end;
 }
 
 .about-magazine-number > span {
@@ -4861,6 +4862,7 @@ p {
 @media (max-width: 600px) {
   .about-magazine-number {
     gap: 18px;
+    justify-self: start;
   }
 }
 
