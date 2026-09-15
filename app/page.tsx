@@ -296,8 +296,8 @@ export default function Home() {
       <link
         rel="preload"
         as="image"
-        href="/sabat-hero-v5.webp"
-        type="image/webp"
+        href="/sabat-hero-sky.png"
+        type="image/png"
         fetchPriority="high"
       />
       <Header />
