@@ -9,8 +9,8 @@ export function Footer() {
           <Image
             src="/sabat-logo.png"
             alt=""
-            width={58}
-            height={58}
+            width={92}
+            height={65}
             unoptimized
           />
           <div>

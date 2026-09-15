@@ -57,7 +57,7 @@ function NewsImage({ item, className }: { item: NewsListItem; className: string 
 
   return (
     <div className={className} aria-hidden={!imageUrl}>
-      {imageUrl ? <img src={imageUrl} alt="" /> : null}
+      {imageUrl ? <img src={imageUrl} alt="" loading="lazy" decoding="async" /> : null}
     </div>
   );
 }
@@ -70,6 +70,7 @@ export function NewsArchive() {
   const [error, setError] = useState(false);
   const [requestVersion, setRequestVersion] = useState(0);
   const [showcaseOffset, setShowcaseOffset] = useState(0);
+  const [showcaseDirection, setShowcaseDirection] = useState<"previous" | "next" | null>(null);
 
   useEffect(() => {
     const savedLanguage = window.localStorage.getItem("sabat-language") as Language | null;
@@ -101,7 +102,6 @@ export function NewsArchive() {
 
       try {
         const result = await apiRequest<NewsPage>(`/api/news?${query.toString()}`, {
-          cache: "no-store",
           signal: controller.signal,
         });
         setNewsPage(result);
@@ -126,6 +126,15 @@ export function NewsArchive() {
     (_, index) => showcaseSource[(index + showcaseOffset) % showcaseSource.length],
   );
   const latest = stories.slice(3);
+
+  function moveShowcase(direction: "previous" | "next") {
+    setShowcaseDirection(direction);
+    setShowcaseOffset((value) =>
+      direction === "previous"
+        ? (value - 1 + showcaseSource.length) % showcaseSource.length
+        : (value + 1) % showcaseSource.length,
+    );
+  }
 
   return (
     <>
@@ -152,7 +161,10 @@ export function NewsArchive() {
         ) : (
           <>
             <section className="news-showcase" aria-label={page.latest}>
-              <div className="container news-grid news-showcase-grid">
+              <div
+                className={`container news-grid news-showcase-grid news-carousel-grid${showcaseDirection ? ` is-${showcaseDirection}` : ""}`}
+                key={showcaseOffset}
+              >
                 {showcase.map((item, index) => (
                   <Link
                     className={`news-card news-showcase-card ${index === 0 ? "featured" : "compact"}`}
@@ -171,21 +183,14 @@ export function NewsArchive() {
                   <button
                     type="button"
                     aria-label={controls.previousStory}
-                    onClick={() =>
-                      setShowcaseOffset(
-                        (value) =>
-                          (value - 1 + showcaseSource.length) % showcaseSource.length,
-                      )
-                    }
+                    onClick={() => moveShowcase("previous")}
                   >
                     ‹
                   </button>
                   <button
                     type="button"
                     aria-label={controls.nextStory}
-                    onClick={() =>
-                      setShowcaseOffset((value) => (value + 1) % showcaseSource.length)
-                    }
+                    onClick={() => moveShowcase("next")}
                   >
                     ›
                   </button>

@@ -67,6 +67,7 @@ export class AdminApiError extends Error {
   constructor(
     public readonly status: number,
     message: string,
+    public readonly fieldErrors: Record<string, string[]> = {},
   ) {
     super(message);
     this.name = "AdminApiError";
@@ -121,14 +122,27 @@ export async function adminRequest<T>(
 
   if (!response.ok) {
     let message = "Не удалось выполнить запрос.";
+    let fieldErrors: Record<string, string[]> = {};
     try {
       const payload = (await response.json()) as {
         detail?: string;
         error?: string;
+        errors?: Record<string, string | string[]>;
         message?: string;
         title?: string;
       };
-      message =
+
+      if (payload.errors) {
+        fieldErrors = Object.fromEntries(
+          Object.entries(payload.errors).map(([key, value]) => [
+            key.charAt(0).toLowerCase() + key.slice(1),
+            Array.isArray(value) ? value : [value],
+          ]),
+        );
+      }
+
+      const firstValidationMessage = Object.values(fieldErrors).flat()[0];
+      message = firstValidationMessage ??
         payload.detail ?? payload.message ?? payload.error ?? payload.title ?? message;
     } catch {
       if (response.status === 401) message = "Сессия завершена. Войдите снова.";
@@ -141,7 +155,7 @@ export async function adminRequest<T>(
     ) {
       window.dispatchEvent(new CustomEvent("sabat-admin-session-invalid"));
     }
-    throw new AdminApiError(response.status, message);
+    throw new AdminApiError(response.status, message, fieldErrors);
   }
 
   if (response.status === 204) return undefined as T;

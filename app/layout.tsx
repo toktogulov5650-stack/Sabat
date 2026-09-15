@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
-import { headers } from "next/headers";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -9,9 +8,7 @@ const manrope = Manrope({
   display: "swap",
 });
 
-export async function generateMetadata(): Promise<Metadata> {
-  await headers();
-
+export function generateMetadata(): Metadata {
   return {
     title: {
       default: "Sabat — фонд общественных инициатив",

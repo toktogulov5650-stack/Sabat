@@ -29,6 +29,18 @@ const API_URL = (
 ).replace(/\/$/, "");
 const API_PROXY_PATH = "/api/backend";
 
+function getApiBaseUrl() {
+  if (typeof window !== "undefined") {
+    const hostname = window.location.hostname;
+
+    if (hostname === "localhost" || hostname === "127.0.0.1") {
+      return API_URL;
+    }
+  }
+
+  return API_PROXY_PATH;
+}
+
 const defaultErrorMessages: Record<number, string> = {
   400: "The request contains invalid data.",
   404: "The requested resource was not found.",
@@ -50,12 +62,15 @@ export async function apiRequest<T>(
   path: string,
   options: RequestInit = {},
 ): Promise<T> {
-  const response = await fetch(`${API_PROXY_PATH}${path}`, {
+  const headers = new Headers(options.headers);
+
+  if (options.body != null && !headers.has("Content-Type")) {
+    headers.set("Content-Type", "application/json");
+  }
+
+  const response = await fetch(`${getApiBaseUrl()}${path}`, {
     ...options,
-    headers: {
-      "Content-Type": "application/json",
-      ...options.headers,
-    },
+    headers,
   });
 
   if (!response.ok) {

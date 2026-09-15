@@ -24,7 +24,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
     <div className="admin-app">
       <aside className={`admin-sidebar ${menuOpen ? "is-open" : ""}`}>
         <Link href="/admin" className="admin-brand" aria-label="Sabat — панель управления">
-          <Image src="/sabat-logo.png" alt="" width={42} height={42} unoptimized />
+          <Image src="/sabat-logo.png" alt="" width={63} height={45} unoptimized />
           <strong>Sabat</strong>
         </Link>
         <nav className="admin-nav" aria-label="Разделы панели управления">

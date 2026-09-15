@@ -27,13 +27,10 @@ export default function AdminLoginPage() {
     <main id="main-content" className="admin-login">
       <section className="admin-login-panel">
         <div className="admin-login-brand">
-          <Image src="/sabat-logo.png" alt="" width={46} height={46} priority unoptimized />
-          <span>Sabat</span>
+          <Image src="/sabat-logo.png" alt="" width={70} height={50} priority unoptimized />
         </div>
         <div className="admin-login-copy">
-          <span className="admin-eyebrow">Панель управления</span>
           <h1>Добро пожаловать</h1>
-          <p>Войдите в защищённую область для управления новостями и обращениями.</p>
           {error ? <div className="admin-alert" role="alert">{error}</div> : null}
           <form className="admin-login-form" onSubmit={handleSubmit}>
             <label className="admin-field">

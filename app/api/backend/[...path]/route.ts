@@ -13,6 +13,7 @@ async function forwardRequest(request: Request, context: RouteContext) {
   const incomingUrl = new URL(request.url);
   const targetUrl = new URL(`/${path.map(encodeURIComponent).join("/")}`, API_URL);
   targetUrl.search = incomingUrl.search;
+  const cacheableNewsRequest = request.method === "GET" && path[0] === "api" && path[1] === "news";
 
   const headers = new Headers();
   const contentType = request.headers.get("content-type");
@@ -27,7 +28,7 @@ async function forwardRequest(request: Request, context: RouteContext) {
       body: request.method === "GET" || request.method === "HEAD"
         ? undefined
         : await request.arrayBuffer(),
-      cache: "no-store",
+      cache: cacheableNewsRequest ? "force-cache" : "no-store",
     });
 
     const responseHeaders = new Headers();
@@ -35,6 +36,12 @@ async function forwardRequest(request: Request, context: RouteContext) {
     const retryAfter = response.headers.get("retry-after");
     if (responseContentType) responseHeaders.set("content-type", responseContentType);
     if (retryAfter) responseHeaders.set("retry-after", retryAfter);
+    if (cacheableNewsRequest && response.ok) {
+      responseHeaders.set(
+        "cache-control",
+        "public, max-age=0, s-maxage=60, stale-while-revalidate=300",
+      );
+    }
 
     return new Response(response.body, {
       status: response.status,

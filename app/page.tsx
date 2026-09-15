@@ -191,19 +191,19 @@ const valueImages = [
     },
   },
   {
-    src: "/about-our-approach.jpg",
+    src: "/about-our-approach-collaboration-v2.png",
     alt: {
-      ru: "Молодой техник работает с учебным оборудованием",
-      ky: "Жаш техник окуу жабдуулары менен иштеп жатат",
-      en: "A young technician working with training equipment",
+      ru: "Молодые люди вместе работают над учебным заданием",
+      ky: "Жаштар окуу тапшырмасынын үстүндө чогуу иштеп жатышат",
+      en: "Young people working together on a study assignment",
     },
   },
   {
-    src: "/about-social-impact.jpg",
+    src: "/about-social-impact-community.png",
     alt: {
-      ru: "Выпускник поднимает диплом перед учебным зданием",
-      ky: "Бүтүрүүчү окуу жайдын алдында дипломун көтөрүп турат",
-      en: "A graduate raising a diploma in front of an educational building",
+      ru: "Молодые люди вместе создают план общественного проекта",
+      ky: "Жаштар коомдук долбоордун планын чогуу түзүп жатышат",
+      en: "Young people creating a community project plan together",
     },
   },
 ] as const;
@@ -213,6 +213,8 @@ export default function Home() {
   const [news, setNews] = useState<NewsListItem[]>([]);
   const [newsLoading, setNewsLoading] = useState(true);
   const [newsError, setNewsError] = useState(false);
+  const [newsOffset, setNewsOffset] = useState(0);
+  const [newsDirection, setNewsDirection] = useState<"previous" | "next" | null>(null);
 
   const content = pageContent[language];
 
@@ -254,11 +256,13 @@ export default function Home() {
     async function loadNews() {
       setNewsLoading(true);
       setNewsError(false);
+      setNewsOffset(0);
+      setNewsDirection(null);
 
       try {
         const result = await apiRequest<NewsPage>(
           `/api/news/latest?lang=${language}&take=3`,
-          { cache: "no-store", signal: controller.signal },
+          { signal: controller.signal },
         );
         setNews(result.items);
       } catch (error) {
@@ -274,8 +278,28 @@ export default function Home() {
     return () => controller.abort();
   }, [language]);
 
+  const displayedNews = news.map(
+    (_, index) => news[(index + newsOffset) % news.length],
+  );
+
+  function moveNews(direction: "previous" | "next") {
+    setNewsDirection(direction);
+    setNewsOffset((value) =>
+      direction === "previous"
+        ? (value - 1 + news.length) % news.length
+        : (value + 1) % news.length,
+    );
+  }
+
   return (
     <>
+      <link
+        rel="preload"
+        as="image"
+        href="/sabat-hero-v5.webp"
+        type="image/webp"
+        fetchPriority="high"
+      />
       <Header />
 
       <main id="main-content">
@@ -349,8 +373,11 @@ export default function Home() {
           ) : news.length === 0 ? (
             <p className="container news-status">{content.newsEmpty}</p>
           ) : (
-            <div className="container news-grid">
-            {news.map((item, index) => {
+            <div
+              className={`container news-grid news-carousel-grid${newsDirection ? ` is-${newsDirection}` : ""}`}
+              key={newsOffset}
+            >
+            {displayedNews.map((item, index) => {
               const imageUrl = resolveImageUrl(item.coverImageUrl);
 
               return (
@@ -363,7 +390,7 @@ export default function Home() {
                 key={item.slug}
               >
                 <div className="news-image-placeholder" aria-hidden={!imageUrl}>
-                  {imageUrl ? <img src={imageUrl} alt="" /> : null}
+                  {imageUrl ? <img src={imageUrl} alt="" loading="lazy" decoding="async" /> : null}
                 </div>
 
                 <h3>
@@ -384,6 +411,10 @@ export default function Home() {
             <a
               href="#news-card-2"
               aria-label={content.previousNews}
+              onClick={(event) => {
+                event.preventDefault();
+                moveNews("previous");
+              }}
             >
               ‹
             </a>
@@ -391,6 +422,10 @@ export default function Home() {
             <a
               href="#news-card-3"
               aria-label={content.nextNews}
+              onClick={(event) => {
+                event.preventDefault();
+                moveNews("next");
+              }}
             >
               ›
             </a>

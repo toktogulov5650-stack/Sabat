@@ -194,7 +194,7 @@ export function AboutContent() {
             </div>
             <div className="about-minimal-media about-minimal-media-work">
               <Image
-                src="/about-what-we-do.jpg"
+                src="/about-what-we-do.webp"
                 alt={page.workImageAlt}
                 fill
                 sizes="(max-width: 850px) 100vw, 55vw"

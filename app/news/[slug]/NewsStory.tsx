@@ -68,7 +68,7 @@ export function NewsStory({ slug }: { slug: string }) {
       try {
         const result = await apiRequest<NewsDetails>(
           `/api/news/${encodeURIComponent(slug)}?lang=${language}`,
-          { cache: "no-store", signal: controller.signal },
+          { signal: controller.signal },
         );
         setStory(result);
       } catch (requestError) {
@@ -156,7 +156,7 @@ export function NewsStory({ slug }: { slug: string }) {
             <section className="news-story-newspaper" aria-label={story.title}>
               <div className="news-story-paper-grid">
                 <div className="news-story-inline-photo tone-green" aria-hidden={!imageUrl}>
-                  {imageUrl ? <img src={imageUrl} alt="" /> : <span>{page.imageLabel}</span>}
+                  {imageUrl ? <img src={imageUrl} alt="" loading="eager" decoding="async" fetchPriority="high" /> : <span>{page.imageLabel}</span>}
                 </div>
                 <div className="news-story-paper-copy">
                   <div className="news-editorial-meta">
