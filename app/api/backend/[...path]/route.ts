@@ -28,7 +28,6 @@ async function forwardRequest(request: Request, context: RouteContext) {
       body: request.method === "GET" || request.method === "HEAD"
         ? undefined
         : await request.arrayBuffer(),
-      cache: cacheableNewsRequest ? "force-cache" : "no-store",
     });
 
     const responseHeaders = new Headers();
@@ -48,9 +47,14 @@ async function forwardRequest(request: Request, context: RouteContext) {
       statusText: response.statusText,
       headers: responseHeaders,
     });
-  } catch {
+  } catch (error) {
+    console.error("[api/backend] Failed to reach upstream API:", targetUrl.href, error);
+    const detail = error instanceof Error ? error.message : String(error);
     return Response.json(
-      { message: "The API is temporarily unavailable." },
+      {
+        message: "The API is temporarily unavailable.",
+        ...(process.env.NODE_ENV === "development" ? { detail } : {}),
+      },
       { status: 502 },
     );
   }
