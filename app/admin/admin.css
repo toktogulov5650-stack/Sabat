@@ -262,3 +262,226 @@
   .admin-login-panel { padding: 30px 22px; }
   .admin-login-brand { margin-bottom: 38px; }
 }
+
+/* Responsive hardening for the management area */
+
+.admin-main-column,
+.admin-main,
+.admin-card,
+.admin-card-head,
+.admin-card-body,
+.admin-form-grid,
+.admin-form-stack,
+.admin-fields-grid,
+.admin-profile-grid,
+.admin-table-wrap {
+  min-width: 0;
+}
+
+.admin-profile-person > p,
+.admin-message-text,
+.admin-field-hint,
+.admin-field-error {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1180px) {
+  .admin-main {
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+
+  .admin-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 780px) {
+  .admin-sidebar {
+    width: min(280px, calc(100vw - 52px));
+  }
+
+  .admin-mobile-header {
+    position: sticky;
+    z-index: 60;
+    top: 0;
+  }
+
+  .admin-main {
+    padding: 30px 20px 58px;
+  }
+
+  .admin-page-header {
+    gap: 22px;
+  }
+
+  .admin-table {
+    min-width: 680px;
+  }
+
+  .admin-table-wrap {
+    overscroll-behavior-inline: contain;
+    scrollbar-width: thin;
+  }
+
+  .admin-language-tabs {
+    overflow-x: auto;
+    padding-inline: 14px;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+  }
+
+  .admin-language-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .admin-language-tabs button {
+    flex: 0 0 auto;
+  }
+
+  .admin-field input,
+  .admin-field textarea,
+  .admin-field select,
+  .admin-filter-field select,
+  .admin-filter-field input {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 540px) {
+  .admin-mobile-header {
+    min-height: 56px;
+    padding-inline: 14px;
+  }
+
+  .admin-main {
+    padding: 24px 14px 48px;
+  }
+
+  .admin-page-header {
+    margin-bottom: 26px;
+  }
+
+  .admin-page-header h1 {
+    font-size: clamp(30px, 10vw, 36px);
+  }
+
+  .admin-stats {
+    gap: 12px;
+  }
+
+  .admin-stat {
+    min-height: 108px;
+    padding: 17px;
+  }
+
+  .admin-card {
+    border-radius: 12px;
+  }
+
+  .admin-card-head,
+  .admin-card-body,
+  .admin-form-section,
+  .admin-password-form {
+    padding: 18px;
+  }
+
+  .admin-card-head {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .admin-toolbar {
+    padding: 14px;
+  }
+
+  .admin-search {
+    min-width: 0;
+  }
+
+  .admin-editor-actions {
+    align-items: stretch;
+    flex-direction: column-reverse;
+  }
+
+  .admin-editor-actions .admin-button,
+  .admin-password-form .admin-button {
+    width: 100%;
+  }
+
+  .admin-pagination {
+    gap: 14px;
+    padding: 14px;
+  }
+
+  .admin-pagination-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .admin-modal-backdrop {
+    align-items: end;
+    padding: 10px;
+  }
+
+  .admin-modal {
+    width: 100%;
+    max-height: calc(100svh - 20px);
+    border-radius: 14px;
+  }
+
+  .admin-modal-head,
+  .admin-modal-body {
+    padding: 18px;
+  }
+
+  .admin-modal-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .admin-modal-actions .admin-field {
+    min-width: 0;
+  }
+
+  .admin-modal-actions .admin-button {
+    width: 100%;
+  }
+
+  .admin-login {
+    padding: 10px;
+  }
+
+  .admin-login-panel {
+    padding: 28px 18px;
+    border-radius: 13px;
+  }
+
+  .admin-login-copy h1 {
+    margin-bottom: 28px;
+    font-size: clamp(34px, 12vw, 44px);
+  }
+}
+
+@media (max-width: 360px) {
+  .admin-main {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .admin-card-head,
+  .admin-card-body,
+  .admin-form-section,
+  .admin-password-form {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .admin-language-tabs {
+    padding-inline: 8px;
+  }
+
+  .admin-language-tabs button {
+    padding-inline: 11px;
+  }
+}
