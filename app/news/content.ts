@@ -1,7 +1,7 @@
 export const archiveCopy = {
   ru: {
-    title: "Истории и идеи сообщества Sabat.",
-    intro: "Рассказываем о проектах Sabat, людях и идеях, которые помогают знаниям приносить пользу обществу. Делимся опытом участников и результатами важных инициатив.",
+    title: 'Истории и идеи Общественного фонда "Сабат".',
+    intro: 'Рассказываем о проектах Общественного фонда "Сабат", людях и идеях, которые помогают знаниям приносить пользу обществу. Делимся опытом участников и результатами важных инициатив.',
     latest: "Последние публикации",
     read: "Читать материал",
     imageLabel: "Фото материала",
@@ -10,8 +10,8 @@ export const archiveCopy = {
     next: "Следующая новость",
   },
   ky: {
-    title: "Sabat коомчулугунун баяндары жана идеялары.",
-    intro: "Sabat долбоорлору, адамдар жана билимди коомдун пайдасына багыттаган идеялар жөнүндө айтып беребиз. Катышуучулардын тажрыйбасын жана маанилүү демилгелердин жыйынтыктарын бөлүшөбүз.",
+    title: '\"Сабат\" коомдук фонду: баяндар жана идеялар.',
+    intro: '\"Сабат\" коомдук фонду ишке ашырган долбоорлор, адамдар жана билимди коомдун пайдасына багыттаган идеялар жөнүндө айтып беребиз. Катышуучулардын тажрыйбасын жана маанилүү демилгелердин жыйынтыктарын бөлүшөбүз.',
     latest: "Акыркы жарыялар",
     read: "Материалды окуу",
     imageLabel: "Материалдын сүрөтү",
@@ -20,8 +20,8 @@ export const archiveCopy = {
     next: "Кийинки жаңылык",
   },
   en: {
-    title: "Stories and ideas from the Sabat community.",
-    intro: "Stories about Sabat projects, people and ideas that help knowledge create value for society. We share participants’ experiences and the results of meaningful initiatives.",
+    title: "Stories and ideas from Sabat Public Foundation.",
+    intro: "Stories about Sabat Public Foundation projects, people and ideas that help knowledge create value for society. We share participants’ experiences and the results of meaningful initiatives.",
     latest: "Latest stories",
     read: "Read the story",
     imageLabel: "Story image",

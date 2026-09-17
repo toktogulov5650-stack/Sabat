@@ -59,6 +59,12 @@ const languageLabels = {
   },
 };
 
+const foundationNames: Record<Language, string> = {
+  ru: 'Общественный фонд "Сабат"',
+  ky: '"Сабат" коомдук фонду',
+  en: "Sabat Public Foundation",
+};
+
 export function Header() {
   const pathname = usePathname();
   const router = useRouter();
@@ -154,14 +160,14 @@ export function Header() {
         <Link
           className="brand"
           href="/"
-          aria-label="Sabat — главная"
+          aria-label={foundationNames[language]}
           prefetch
           onPointerEnter={() => prepareRoute("/")}
           onFocus={() => prepareRoute("/")}
         >
           <Image
             src="/sabat-logo.png"
-            alt="Sabat"
+            alt={foundationNames[language]}
             width={91}
             height={65}
             priority

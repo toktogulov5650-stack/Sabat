@@ -8,6 +8,7 @@ import {
   ApiError,
   apiRequest,
   formatNewsDate,
+  normalizeFoundationName,
   resolveImageUrl,
   type Language,
   type NewsDetails,
@@ -134,7 +135,12 @@ export function NewsStory({ slug }: { slug: string }) {
   }
 
   const imageUrl = resolveImageUrl(story.coverImageUrl);
-  const paragraphs = story.content
+  const normalizedTitle = normalizeFoundationName(story.title, language);
+  const normalizedExcerpt = normalizeFoundationName(story.excerpt, language);
+  const normalizedAuthor = story.author
+    ? normalizeFoundationName(story.author, language)
+    : null;
+  const paragraphs = normalizeFoundationName(story.content, language)
     .split(/\r?\n\s*\r?\n/)
     .map((paragraph) => paragraph.trim())
     .filter(Boolean);
@@ -153,17 +159,17 @@ export function NewsStory({ slug }: { slug: string }) {
             </div>
           </header>
           <div className="container">
-            <section className="news-story-newspaper" aria-label={story.title}>
+            <section className="news-story-newspaper" aria-label={normalizedTitle}>
               <div className="news-story-paper-grid">
                 <div className="news-story-inline-photo tone-green" aria-hidden={!imageUrl}>
                   {imageUrl ? <img src={imageUrl} alt="" loading="eager" decoding="async" fetchPriority="high" /> : <span>{page.imageLabel}</span>}
                 </div>
                 <div className="news-story-paper-copy">
                   <div className="news-editorial-meta">
-                    {story.author ? <span>{story.author}</span> : null}
+                    {normalizedAuthor ? <span>{normalizedAuthor}</span> : null}
                   </div>
-                  <h1>{story.title}</h1>
-                  <p className="news-story-paper-intro">{story.excerpt}</p>
+                  <h1>{normalizedTitle}</h1>
+                  <p className="news-story-paper-intro">{normalizedExcerpt}</p>
                   {paragraphs.slice(0, 2).map((paragraph, index) => (
                     <p key={`${index}-${paragraph}`}>{paragraph}</p>
                   ))}

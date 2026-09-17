@@ -8,31 +8,29 @@ const manrope = Manrope({
   display: "swap",
 });
 
-export function generateMetadata(): Metadata {
-  return {
-    title: {
-      default: "Sabat — фонд общественных инициатив",
-      template: "%s | Sabat",
-    },
-    description:
-      "Sabat объединяет людей, поддерживает общественные инициативы и создаёт пространство для добрых перемен.",
-    icons: {
-      icon: "/sabat-logo.png",
-      shortcut: "/sabat-logo.png",
-    },
-    openGraph: {
-      title: "Sabat — фонд общественных инициатив",
-      description: "Объединяем людей вокруг важных дел.",
-      type: "website",
-      locale: "ru_RU",
-    },
-    twitter: {
-      card: "summary",
-      title: "Sabat — фонд общественных инициатив",
-      description: "Объединяем людей вокруг важных дел.",
-    },
-  };
-}
+export const metadata: Metadata = {
+  title: {
+    default: 'Общественный фонд "Сабат"',
+    template: '%s | Общественный фонд "Сабат"',
+  },
+  description:
+    'Общественный фонд "Сабат" объединяет людей, поддерживает общественные инициативы и создаёт пространство для добрых перемен.',
+  icons: {
+    icon: "/sabat-logo.png",
+    shortcut: "/sabat-logo.png",
+  },
+  openGraph: {
+    title: 'Общественный фонд "Сабат"',
+    description: "Объединяем людей вокруг важных дел.",
+    type: "website",
+    locale: "ru_RU",
+  },
+  twitter: {
+    card: "summary",
+    title: 'Общественный фонд "Сабат"',
+    description: "Объединяем людей вокруг важных дел.",
+  },
+};
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (

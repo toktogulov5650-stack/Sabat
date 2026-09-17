@@ -23,9 +23,9 @@ export function AdminShell({ children }: { children: ReactNode }) {
   return (
     <div className="admin-app">
       <aside className={`admin-sidebar ${menuOpen ? "is-open" : ""}`}>
-        <Link href="/admin" className="admin-brand" aria-label="Sabat — панель управления">
+        <Link href="/admin" className="admin-brand" aria-label={'Общественный фонд "Сабат" — панель управления'}>
           <Image src="/sabat-logo.png" alt="" width={63} height={45} unoptimized />
-          <strong>Sabat</strong>
+          <strong>Общественный фонд &quot;Сабат&quot;</strong>
         </Link>
         <nav className="admin-nav" aria-label="Разделы панели управления">
           <span className="admin-nav-label">Рабочая область</span>
@@ -44,7 +44,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
       <div className="admin-main-column">
         <header className="admin-mobile-header">
           <button type="button" onClick={() => setMenuOpen(true)} aria-label="Открыть меню"><MenuIcon /></button>
-          <span>Sabat</span>
+          <span>Общественный фонд &quot;Сабат&quot;</span>
         </header>
         <main id="main-content" className="admin-main">{children}</main>
       </div>

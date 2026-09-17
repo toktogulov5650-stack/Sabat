@@ -8,6 +8,7 @@ import { Header } from "./components/Header";
 import {
   apiRequest,
   formatNewsDate,
+  normalizeFoundationName,
   resolveImageUrl,
   type Language,
   type NewsListItem,
@@ -19,9 +20,7 @@ const pageContent = {
   ru: {
     hero: (
       <>
-        Сначала — достойный человек.
-        <br />
-        Затем — сильный специалист.
+        Настоящий профессионал начинается с настоящего человека.
       </>
     ),
     heroDescription:
@@ -55,8 +54,8 @@ const pageContent = {
   ky: {
     hero: (
       <>
-        Биринчи — мыкты адам.
-        <br />Андан кийин — мыкты адис.
+        АЛГАЧ — МЫКТЫ АДАМ,
+        <br />АНДАН СОҢ — МЫКТЫ АДИС
       </>
     ),
     heroDescription:
@@ -90,8 +89,7 @@ const pageContent = {
   en: {
     hero: (
       <>
-        First, a person of character.
-        <br />Then, a capable professional.
+        A true professional begins with being a good person.
       </>
     ),
     heroDescription:
@@ -128,7 +126,7 @@ const values = {
     {
       title: "Кто мы",
       text:
-        "«Сабат» — общественный образовательный фонд. Через социальные и образовательные проекты мы помогаем молодым людям развивать человеческие качества, осваивать профессию и применять знания на благо общества. Для нас образование — это не только диплом: оно должно формировать мышление, ответственность и понимание своего долга перед людьми.",
+        "Общественный фонд \"Сабат\". Через социальные и образовательные проекты мы помогаем молодым людям развивать человеческие качества, осваивать профессию и применять знания на благо общества. Для нас образование — это не только диплом: оно должно формировать мышление, ответственность и понимание своего долга перед людьми.",
     },
     {
       title: "Наш подход",
@@ -146,7 +144,7 @@ const values = {
     {
       title: "Биз кимбиз",
       text:
-        "«Сабат» — билим берүүчү коомдук фонд. Социалдык жана билим берүү долбоорлору аркылуу жаштардын адамдык сапаттарын өнүктүрүп, кесипти өздөштүрүүгө жана билимин коомдун пайдасына колдонууга жардам беребиз. Биз үчүн билим — диплом гана эмес: ал туура ой жүгүртүүнү, жоопкерчиликти жана эл алдындагы милдетти калыптандырышы керек.",
+        "\"Сабат\" коомдук фонду. Социалдык жана билим берүү долбоорлору аркылуу жаштардын адамдык сапаттарын өнүктүрүп, кесипти өздөштүрүүгө жана билимин коомдун пайдасына колдонууга жардам беребиз. Биз үчүн билим — диплом гана эмес: ал туура ой жүгүртүүнү, жоопкерчиликти жана эл алдындагы милдетти калыптандырышы керек.",
     },
     {
       title: "Биздин ыкма",
@@ -164,7 +162,7 @@ const values = {
     {
       title: "Who we are",
       text:
-        "Sabat is a public education foundation. Through social and educational projects, we help young people develop character, master a profession and apply knowledge for the benefit of society. For us, education is more than a diploma: it should shape clear thinking, responsibility and a sense of duty to others.",
+        "Sabat Public Foundation. Through social and educational projects, we help young people develop character, master a profession and apply knowledge for the benefit of society. For us, education is more than a diploma: it should shape clear thinking, responsibility and a sense of duty to others.",
     },
     {
       title: "Our approach",
@@ -390,7 +388,7 @@ export default function Home() {
                 </div>
 
                 <h3>
-                  {item.title}
+                  {normalizeFoundationName(item.title, language)}
                 </h3>
 
                 <time dateTime={item.publishedAt}>

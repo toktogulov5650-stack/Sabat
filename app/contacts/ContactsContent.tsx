@@ -17,7 +17,7 @@ const copy: Record<Language, ContactsCopy> = {
   ru: {
     title: "Хорошие идеи начинаются с диалога.",
     intro: "Расскажите об инициативе, предложите сотрудничество или задайте вопрос. Мы внимательно читаем каждое сообщение и будем рады вместе обсудить следующие шаги.",
-    panelEyebrow: "Связаться с Sabat",
+    panelEyebrow: 'Общественный фонд "Сабат"',
     panelTitle: "Мы открыты к диалогу.",
     form: {
       title: "Расскажите о вашей идее",
@@ -38,7 +38,7 @@ const copy: Record<Language, ContactsCopy> = {
   ky: {
     title: "Жакшы идеялар диалогдон башталат.",
     intro: "Демилгеңиз тууралуу айтып, кызматташууну сунуштаңыз же суроо бериңиз. Биз ар бир билдирүүнү кунт коюп окуп, кийинки кадамдарды чогуу талкуулоого даярбыз.",
-    panelEyebrow: "Sabat менен байланышуу",
+    panelEyebrow: '"Сабат" коомдук фонду',
     panelTitle: "Биз баарлашууга ачыкпыз.",
     form: {
       title: "Идеяңыз тууралуу айтып бериңиз",
@@ -59,7 +59,7 @@ const copy: Record<Language, ContactsCopy> = {
   en: {
     title: "Good ideas begin with dialogue.",
     intro: "Tell us about your initiative, propose a partnership or ask a question. We read every message carefully and would be glad to discuss the next steps together.",
-    panelEyebrow: "Contact Sabat",
+    panelEyebrow: "Sabat Public Foundation",
     panelTitle: "We are open to dialogue.",
     form: {
       title: "Tell us about your idea",

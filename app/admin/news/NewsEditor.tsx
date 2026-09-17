@@ -176,7 +176,7 @@ export function NewsEditor({ id }: { id?: string }) {
             <div className="admin-form-section admin-fields-grid">
               <label className="admin-field full">Slug<input value={slug} onChange={(event) => setSlug(event.target.value)} placeholder="news-title" pattern="[a-z0-9]+(?:-[a-z0-9]+)*" required /><span className="admin-field-hint">Латиница, цифры и дефисы.</span></label>
               <label className="admin-field full">Ключ категории<input value={categoryKey} onChange={(event) => setCategoryKey(event.target.value)} placeholder="education" required /></label>
-              <label className="admin-field full">Автор<input value={author} onChange={(event) => setAuthor(event.target.value)} placeholder="Sabat" /></label>
+              <label className="admin-field full">Автор<input value={author} onChange={(event) => setAuthor(event.target.value)} placeholder={'Общественный фонд "Сабат"'} /></label>
               <label className="admin-field full">Статус<select value={status} onChange={(event) => setStatus(event.target.value as NewsStatus)}><option value="Draft">Черновик</option><option value="Published">Опубликовано</option><option value="Archived">В архиве</option></select></label>
               {status === "Published" ? <label className="admin-field full">Дата публикации<input type="datetime-local" value={publishedAt} onChange={(event) => setPublishedAt(event.target.value)} /></label> : null}
             </div>

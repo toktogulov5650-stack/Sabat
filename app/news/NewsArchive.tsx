@@ -7,6 +7,7 @@ import { Header } from "../components/Header";
 import {
   apiRequest,
   formatNewsDate,
+  normalizeFoundationName,
   resolveImageUrl,
   type Language,
   type NewsListItem,
@@ -176,7 +177,7 @@ export function NewsArchive() {
                     key={item.id}
                   >
                     <NewsImage item={item} className="news-image-placeholder" />
-                    <h3>{item.title}</h3>
+                    <h3>{normalizeFoundationName(item.title, language)}</h3>
                     <time dateTime={item.publishedAt}>{formatNewsDate(item.publishedAt, language)}</time>
                   </Link>
                 ))}
@@ -215,8 +216,8 @@ export function NewsArchive() {
                           <div className="news-editorial-meta">
                             <time dateTime={item.publishedAt}>{formatNewsDate(item.publishedAt, language)}</time>
                           </div>
-                          <h3>{item.title}</h3>
-                          <p>{item.excerpt}</p>
+                          <h3>{normalizeFoundationName(item.title, language)}</h3>
+                          <p>{normalizeFoundationName(item.excerpt, language)}</p>
                         </div>
                         <span className="news-editorial-arrow" aria-hidden="true">↗</span>
                       </Link>

@@ -110,6 +110,31 @@ export function formatNewsDate(date: string, language: Language) {
   }).format(new Date(date));
 }
 
+export function normalizeFoundationName(value: string, language: Language) {
+  if (language === "ru") {
+    return value
+      .replace(/общественных проектов Sabat/gi, 'проектов Общественного фонда "Сабат"')
+      .replace(/сообщества Sabat/gi, 'Общественного фонда "Сабат"')
+      .replace(/проектах Sabat/gi, 'проектах Общественного фонда "Сабат"')
+      .replace(/\bSabat\b/g, 'Общественный фонд "Сабат"');
+  }
+
+  if (language === "ky") {
+    return value
+      .replace(/Sabat коомдук долбоорлорунун/g, '"Сабат" коомдук фонду: коомдук долбоорлордун')
+      .replace(/Sabat коомчулугунун/g, '"Сабат" коомдук фонду:')
+      .replace(/Sabat долбоорлору/g, '"Сабат" коомдук фонду ишке ашырган долбоорлор')
+      .replace(/\bSabat\b/g, '"Сабат" коомдук фонду');
+  }
+
+  return value
+    .replace(/Sabat community projects/g, "Sabat Public Foundation projects")
+    .replace(/the Sabat community/g, "Sabat Public Foundation")
+    .replace(/Sabat community/g, "Sabat Public Foundation")
+    .replace(/Sabat projects/g, "Sabat Public Foundation projects")
+    .replace(/\bSabat\b(?! Public Foundation)/g, "Sabat Public Foundation");
+}
+
 export function resolveImageUrl(url: string | null) {
   if (!url) return null;
   if (/^https?:\/\//i.test(url)) return url;

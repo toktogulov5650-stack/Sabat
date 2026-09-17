@@ -3,7 +3,7 @@ import { NewsArchive } from "./NewsArchive";
 
 export const metadata: Metadata = {
   title: "Новости",
-  description: "Новости, события и истории образовательного фонда Sabat.",
+  description: 'Новости, события и истории Общественного фонда "Сабат".',
 };
 
 export default function NewsPage() {

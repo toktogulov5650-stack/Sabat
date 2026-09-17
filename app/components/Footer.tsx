@@ -1,7 +1,37 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+
+type Language = "ru" | "ky" | "en";
+
+const foundationNames: Record<Language, string> = {
+  ru: 'Общественный фонд "Сабат"',
+  ky: '"Сабат" коомдук фонду',
+  en: "Sabat Public Foundation",
+};
 
 export function Footer() {
+  const [language, setLanguage] = useState<Language>("ru");
+
+  useEffect(() => {
+    const savedLanguage = window.localStorage.getItem("sabat-language") as Language | null;
+
+    if (savedLanguage === "ru" || savedLanguage === "ky" || savedLanguage === "en") {
+      setLanguage(savedLanguage);
+    }
+
+    const handleLanguageChange = (event: Event) => {
+      setLanguage((event as CustomEvent<Language>).detail);
+    };
+
+    window.addEventListener("sabat-language-change", handleLanguageChange);
+    return () => window.removeEventListener("sabat-language-change", handleLanguageChange);
+  }, []);
+
+  const foundationName = foundationNames[language];
+
   return (
     <footer className="site-footer">
       <div className="container footer-grid">
@@ -14,13 +44,12 @@ export function Footer() {
             unoptimized
           />
           <div>
-            <strong>SABAT</strong>
-            <span>билим берүү борбору</span>
+            <strong>{foundationName}</strong>
           </div>
         </div>
 
         <div>
-          <h3>Sabat билим берүү борбору</h3>
+          <h3>{foundationName}</h3>
           <a href="mailto:sabatfoundation@gmail.com">
             sabatfoundation@gmail.com
           </a>
