@@ -40,3 +40,31 @@ Using secrets defined in .env.local
  GET /?_rsc=mQ8-DhdA9y9hKsol 200 in 2.5s (compile: 1789667467.5s, render: 0ms)
  GET /news?_rsc=mQ8-DhdA9y9hKsol 200 in 2.6s (compile: 1789667467.6s, render: 0ms)
  GET /about?_rsc=mQ8-DhdA9y9hKsol 200 in 2.6s (compile: 1789667467.4s, render: 0ms)
+00:04:34 [vite] (rsc) hmr update /app/globals.css
+00:04:34 [vite] (client) hmr update /app/globals.css?direct
+ GET /about 200 in 9.7s (compile: 1789667470.9s, render: 4.9s)
+ GET /?_rsc=pLJGGFQyJAB1jrj8 200 in 4.4s (compile: 1789667469.7s, render: 0ms)
+ GET /news?_rsc=pLJGGFQyJAB1jrj8 200 in 4.5s (compile: 1789667468.9s, render: 0ms)
+ GET /contacts?_rsc=pLJGGFQyJAB1jrj8 200 in 4.6s (compile: 1789667468.9s, render: 0ms)
+00:06:58 [vite] (rsc) hmr update /app/globals.css
+00:06:58 [vite] (client) hmr update /app/globals.css?direct
+ GET /about?_rsc 200 in 2.2s (compile: 1789667467.9s, render: 0ms)
+00:07:14 [vite] (rsc) hmr update /app/globals.css
+00:07:14 [vite] (client) hmr update /app/globals.css?direct
+ GET /about?_rsc 200 in 1.9s (compile: 1789667467.8s, render: 0ms)
+ GET /about 200 in 5.1s (compile: 1789667466.6s, render: 4.6s)
+ GET /news?_rsc=pLJGGFQyJAB1jrj8 200 in 4.3s (compile: 1789667467.3s, render: 0ms)
+ GET /?_rsc=pLJGGFQyJAB1jrj8 200 in 4.4s (compile: 1789667469.6s, render: 0ms)
+ GET /contacts?_rsc=pLJGGFQyJAB1jrj8 200 in 4.5s (compile: 1789667469.5s, render: 0ms)
+ GET /news 200 in 4.8s (compile: 1789667466.7s, render: 4.2s)
+ GET /?_rsc=Yy25Brs4oF4OetG1 200 in 3.4s (compile: 1789667468.4s, render: 0ms)
+ GET /about?_rsc=Yy25Brs4oF4OetG1 200 in 3.5s (compile: 1789667468.5s, render: 0ms)
+ GET /contacts?_rsc=Yy25Brs4oF4OetG1 200 in 3.6s (compile: 1789667468.4s, render: 0ms)
+ GET /api/backend/api/news?lang=ru&page=1&pageSize=12 200 in 4.5s
+ GET /contacts 200 in 5.8s (compile: 1789667466.5s, render: 5.4s)
+ GET /?_rsc=mQ8-DhdA9y9hKsol 200 in 2.0s (compile: 1789667467.6s, render: 0ms)
+ GET /about?_rsc=mQ8-DhdA9y9hKsol 200 in 2.0s (compile: 1789667466.8s, render: 0ms)
+ GET /news?_rsc=mQ8-DhdA9y9hKsol 200 in 2.1s (compile: 1789667466.8s, render: 0ms)
+00:10:47 [vite] (rsc) hmr update /app/globals.css
+00:10:47 [vite] (client) hmr update /app/globals.css?direct
+ GET /contacts?_rsc 200 in 2.1s (compile: 1789667467.8s, render: 0ms)

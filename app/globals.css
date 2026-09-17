@@ -1338,7 +1338,7 @@ video {
   }
 }
 
-/* Desktop/laptop inner-page intro: keep the next section below the fold. */
+Desktop/laptop inner-page intro: keep the next section below the fold.
 @media (min-width: 851px) {
   .about-minimal-hero,
   .news-editorial-hero,
@@ -1346,8 +1346,19 @@ video {
     box-sizing: border-box;
     min-height: calc(100svh - 82px);
     min-height: calc(100dvh - 82px);
-    padding-top: clamp(64px, 9vh, 92px);
+    padding-top: clamp(64px, 9vh, 92.01px);
     padding-bottom: clamp(64px, 9vh, 92px);
+  }
+}
+
+Keep the desktop intro full-screen, but anchor its copy in the upper third.
+@media (min-width: 851px) {
+  .about-minimal-hero,
+  .news-editorial-hero,
+  .contact-editorial-hero {
+    align-items: start;
+    padding-top: clamp(72px, 10vh, 104px);
+    border-bottom: 1px solid var(--line);
   }
 }
 
@@ -7514,9 +7525,11 @@ video {
   .news-editorial-hero,
   .contact-editorial-hero {
     box-sizing: border-box;
+    align-items: start;
     min-height: calc(100svh - 82px);
     min-height: calc(100dvh - 82px);
-    padding-top: clamp(64px, 9vh, 92px);
+    padding-top: clamp(72px, 10vh, 104px);
     padding-bottom: clamp(64px, 9vh, 92px);
+    border-bottom: 1px solid var(--line);
   }
 }
