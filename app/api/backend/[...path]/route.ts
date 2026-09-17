@@ -25,6 +25,7 @@ async function forwardRequest(request: Request, context: RouteContext) {
     const response = await fetch(targetUrl, {
       method: request.method,
       headers,
+      signal: AbortSignal.any([request.signal, AbortSignal.timeout(10_000)]),
       body: request.method === "GET" || request.method === "HEAD"
         ? undefined
         : await request.arrayBuffer(),

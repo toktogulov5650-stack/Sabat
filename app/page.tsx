@@ -13,6 +13,7 @@ import {
   type NewsListItem,
   type NewsPage,
 } from "./lib/api";
+import { fallbackNews } from "./news/fallback";
 
 const pageContent = {
   ru: {
@@ -43,7 +44,6 @@ const pageContent = {
     ),
 
     news: "Новости",
-    newsLoading: "Загружаем новости…",
     newsError: "Не удалось загрузить новости. Попробуйте обновить страницу.",
     newsEmpty: "Пока нет опубликованных новостей.",
     about: "О нас",
@@ -79,7 +79,6 @@ const pageContent = {
     ),
 
     news: "Жаңылыктар",
-    newsLoading: "Жаңылыктар жүктөлүүдө…",
     newsError: "Жаңылыктарды жүктөө мүмкүн болгон жок. Баракты жаңыртып көрүңүз.",
     newsEmpty: "Азырынча жарыяланган жаңылыктар жок.",
     about: "Биз жөнүндө",
@@ -115,7 +114,6 @@ const pageContent = {
     ),
 
     news: "News",
-    newsLoading: "Loading news…",
     newsError: "We couldn’t load the news. Please refresh the page.",
     newsEmpty: "There are no published stories yet.",
     about: "About us",
@@ -210,8 +208,9 @@ const valueImages = [
 
 export default function Home() {
   const [language, setLanguage] = useState<Language>("ru");
-  const [news, setNews] = useState<NewsListItem[]>([]);
-  const [newsLoading, setNewsLoading] = useState(true);
+  const [news, setNews] = useState<NewsListItem[]>(
+    fallbackNews.ru.items.slice(0, 3),
+  );
   const [newsError, setNewsError] = useState(false);
   const [newsOffset, setNewsOffset] = useState(0);
   const [newsDirection, setNewsDirection] = useState<"previous" | "next" | null>(null);
@@ -254,7 +253,7 @@ export default function Home() {
     const controller = new AbortController();
 
     async function loadNews() {
-      setNewsLoading(true);
+      setNews(fallbackNews[language].items.slice(0, 3));
       setNewsError(false);
       setNewsOffset(0);
       setNewsDirection(null);
@@ -267,10 +266,9 @@ export default function Home() {
         setNews(result.items);
       } catch (error) {
         if (error instanceof DOMException && error.name === "AbortError") return;
-        setNews([]);
-        setNewsError(true);
-      } finally {
-        if (!controller.signal.aborted) setNewsLoading(false);
+        // Keep the built-in snapshot visible during a cold start or a
+        // temporary API outage. The next visit refreshes it again.
+        setNews(fallbackNews[language].items.slice(0, 3));
       }
     }
 
@@ -366,9 +364,7 @@ export default function Home() {
             </h2>
           </div>
 
-          {newsLoading ? (
-            <p className="container news-status" role="status">{content.newsLoading}</p>
-          ) : newsError ? (
+          {newsError ? (
             <p className="container news-status news-status-error" role="alert">{content.newsError}</p>
           ) : news.length === 0 ? (
             <p className="container news-status">{content.newsEmpty}</p>
@@ -406,7 +402,7 @@ export default function Home() {
             </div>
           )}
 
-          {!newsLoading && !newsError && news.length > 1 ? <div className="news-controls">
+          {!newsError && news.length > 1 ? <div className="news-controls">
 
             <a
               href="#news-card-2"

@@ -28,6 +28,7 @@ const API_URL = (
   "https://sabat-api-903514828590.us-east1.run.app"
 ).replace(/\/$/, "");
 const API_PROXY_PATH = "/api/backend";
+const REQUEST_TIMEOUT_MS = 10_000;
 
 function getApiBaseUrl() {
   return API_PROXY_PATH;
@@ -60,9 +61,15 @@ export async function apiRequest<T>(
     headers.set("Content-Type", "application/json");
   }
 
+  const timeoutSignal = AbortSignal.timeout(REQUEST_TIMEOUT_MS);
+  const signal = options.signal
+    ? AbortSignal.any([options.signal, timeoutSignal])
+    : timeoutSignal;
+
   const response = await fetch(`${getApiBaseUrl()}${path}`, {
     ...options,
     headers,
+    signal,
   });
 
   if (!response.ok) {
