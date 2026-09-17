@@ -5,173 +5,38 @@
 
   vinext dev  (Vite 8.0.13)
 
+23:51:11 [vite] (ssr) Re-optimizing dependencies because vite config has changed
+23:51:11 [vite] (rsc) Re-optimizing dependencies because vite config has changed
 Using secrets defined in .env.local
+23:51:13 [vite] (rsc) [optimizer] scanning dependencies...
+23:51:13 [vite] (ssr) [optimizer] scanning dependencies...
+23:51:15 [vite] (ssr) [optimizer] bundling dependencies...
+23:51:15 [vite] (rsc) [optimizer] bundling dependencies...
+23:51:36 [vite] (client) Re-optimizing dependencies because vite config has changed
   ➜  Local:   http://localhost:3000/
   ➜  Debug:   http://localhost:3000/__debug
- GET / 200 in 9.7s (compile: 1789660383.3s, render: 8.7s)
- GET /news?_rsc=NZOER9_Iicx1d9mR 200 in 17.2s (compile: 1789660394.6s, render: 0ms)
- GET /about?_rsc=NZOER9_Iicx1d9mR 200 in 17.6s (compile: 1789660394.6s, render: 0ms)
- GET /contacts?_rsc=NZOER9_Iicx1d9mR 200 in 17.6s (compile: 1789660394.5s, render: 0ms)
- GET / 200 in 6.4s (compile: 1789660382.9s, render: 5.8s)
- GET /about 200 in 5.9s (compile: 1789660382.9s, render: 5.4s)
- GET /?_rsc=pLJGGFQyJAB1jrj8 200 in 2.3s (compile: 1789660383.7s, render: 0ms)
- GET /news?_rsc=pLJGGFQyJAB1jrj8 200 in 2.5s (compile: 1789660383.7s, render: 0ms)
- GET /contacts?_rsc=pLJGGFQyJAB1jrj8 200 in 2.7s (compile: 1789660383.6s, render: 0ms)
- GET /news 200 in 6.5s (compile: 1789660382.9s, render: 6.0s)
- GET /api/backend/api/news?lang=en&page=1&pageSize=12 200 in 3.6s
- GET /?_rsc=Yy25Brs4oF4OetG1 200 in 4.3s (compile: 1789660385.0s, render: 0ms)
- GET /about?_rsc=Yy25Brs4oF4OetG1 200 in 4.5s (compile: 1789660384.0s, render: 0ms)
- GET /contacts?_rsc=Yy25Brs4oF4OetG1 200 in 4.8s (compile: 1789660384.1s, render: 0ms)
- GET /news/new-season 200 in 13.4s (compile: 1789660387.5s, render: 8.1s)
- GET /api/backend/api/news/new-season?lang=en 404 in 5.2s
- GET /about?_rsc=qfQbyqgw1QyzryIG 200 in 6.4s (compile: 1789660384.5s, render: 0ms)
- GET /news?_rsc=qfQbyqgw1QyzryIG 200 in 6.6s (compile: 1789660385.0s, render: 0ms)
- GET /?_rsc=qfQbyqgw1QyzryIG 200 in 6.9s (compile: 1789660387.8s, render: 0ms)
- GET /contacts?_rsc=qfQbyqgw1QyzryIG 200 in 6.9s (compile: 1789660384.5s, render: 0ms)
-22:04:33 [vite] (rsc) hmr update /app/globals.css
-22:04:34 [vite] (client) hmr update /app/globals.css?direct
- GET /news/new-season?_rsc 200 in 8.2s (compile: 1789660389.5s, render: 0ms)
-22:06:00 [vite] (rsc) hmr update /app/globals.css
-22:06:00 [vite] (client) hmr update /app/globals.css?direct
- GET /news/new-season?_rsc 200 in 3.1s (compile: 1789660385.2s, render: 0ms)
-22:07:08 [vite] (rsc) hmr update /app/globals.css
-22:07:08 [vite] (client) hmr update /app/globals.css?direct
- GET /news/new-season?_rsc 200 in 3.0s (compile: 1789660385.0s, render: 0ms)
-22:07:50 [vite] (rsc) hmr update /app/globals.css
-22:07:50 [vite] (client) hmr update /app/globals.css?direct
- GET /news/new-season?_rsc 200 in 2.4s (compile: 1789660384.5s, render: 0ms)
- GET / 200 in 6.6s (compile: 1789660383.6s, render: 5.2s)
- GET /about?_rsc=NZOER9_Iicx1d9mR 200 in 5.9s (compile: 1789660386.4s, render: 0ms)
- GET /news?_rsc=NZOER9_Iicx1d9mR 200 in 6.2s (compile: 1789660387.4s, render: 0ms)
- GET /contacts?_rsc=NZOER9_Iicx1d9mR 200 in 6.5s (compile: 1789660386.4s, render: 0ms)
- GET /api/backend/api/news/latest?lang=en&take=3 200 in 7.2s
- GET / 200 in 7.4s (compile: 1789660383.0s, render: 6.7s)
- GET /api/backend/api/news/latest?lang=en&take=3 502 in 2.7s
- GET /about?_rsc=NZOER9_Iicx1d9mR 200 in 4.3s (compile: 1789660385.1s, render: 0ms)
- GET /news?_rsc=NZOER9_Iicx1d9mR 200 in 4.9s (compile: 1789660385.1s, render: 0ms)
- GET /contacts?_rsc=NZOER9_Iicx1d9mR 200 in 5.1s (compile: 1789660385.8s, render: 0ms)
-22:35:52 [vite] (rsc) hmr update /app/globals.css
-22:35:52 [vite] (client) hmr update /app/globals.css?direct
- GET /?_rsc 200 in 3.8s (compile: 1789660385.9s, render: 0ms)
-22:36:23 [vite] (rsc) hmr update /app/globals.css
-22:36:23 [vite] (client) hmr update /app/globals.css?direct
- GET /?_rsc 200 in 4.0s (compile: 1789660385.9s, render: 0ms)
- GET / 200 in 5.1s (compile: 1789660382.7s, render: 4.6s)
- GET /news?_rsc=NZOER9_Iicx1d9mR 200 in 5.3s (compile: 1789660386.3s, render: 0ms)
- GET /about?_rsc=NZOER9_Iicx1d9mR 200 in 5.5s (compile: 1789660386.3s, render: 0ms)
- GET /contacts?_rsc=NZOER9_Iicx1d9mR 200 in 5.6s (compile: 1789660386.3s, render: 0ms)
-22:38:56 [vite] (rsc) hmr update /app/globals.css
-22:38:56 [vite] (client) hmr update /app/globals.css?direct
- GET /?_rsc 200 in 6.6s (compile: 1789660388.5s, render: 0ms)
- GET / 200 in 4.5s (compile: 1789660382.8s, render: 3.9s)
- GET /api/backend/api/news/latest?lang=en&take=3 200 in 4.5s
- GET /news?_rsc=NZOER9_Iicx1d9mR 200 in 5.4s (compile: 1789660386.3s, render: 0ms)
- GET /about?_rsc=NZOER9_Iicx1d9mR 200 in 5.5s (compile: 1789660386.3s, render: 0ms)
- GET /contacts?_rsc=NZOER9_Iicx1d9mR 200 in 5.7s (compile: 1789660386.3s, render: 0ms)
- GET /api/backend/api/news/latest?lang=ru&take=3 200 in 2.1s
- GET /about 200 in 5.0s (compile: 1789660382.7s, render: 4.3s)
- GET /?_rsc=pLJGGFQyJAB1jrj8 200 in 2.5s (compile: 1789660383.5s, render: 0ms)
- GET /news?_rsc=pLJGGFQyJAB1jrj8 200 in 2.5s (compile: 1789660383.4s, render: 0ms)
- GET /contacts?_rsc=pLJGGFQyJAB1jrj8 200 in 2.7s (compile: 1789660383.4s, render: 0ms)
- GET /news 200 in 5.3s (compile: 1789660382.7s, render: 4.6s)
- GET /api/backend/api/news?lang=ru&page=1&pageSize=12 200 in 3.1s
- GET /?_rsc=Yy25Brs4oF4OetG1 200 in 3.2s (compile: 1789660385.0s, render: 0ms)
- GET /about?_rsc=Yy25Brs4oF4OetG1 200 in 3.4s (compile: 1789660383.5s, render: 0ms)
- GET /contacts?_rsc=Yy25Brs4oF4OetG1 200 in 3.6s (compile: 1789660383.6s, render: 0ms)
- GET /contacts 200 in 5.6s (compile: 1789660382.8s, render: 5.1s)
- GET /?_rsc=mQ8-DhdA9y9hKsol 200 in 2.1s (compile: 1789660383.1s, render: 0ms)
- GET /about?_rsc=mQ8-DhdA9y9hKsol 200 in 2.3s (compile: 1789660383.1s, render: 0ms)
- GET /news?_rsc=mQ8-DhdA9y9hKsol 200 in 2.4s (compile: 1789660383.1s, render: 0ms)
- GET / 200 in 6.2s (compile: 1789660382.9s, render: 5.6s)
- GET /api/backend/api/news/latest?lang=ru&take=3 200 in 1.6s
- GET /news?_rsc=NZOER9_Iicx1d9mR 200 in 2.5s (compile: 1789660383.4s, render: 0ms)
- GET /about?_rsc=NZOER9_Iicx1d9mR 200 in 2.7s (compile: 1789660383.5s, render: 0ms)
- GET /contacts?_rsc=NZOER9_Iicx1d9mR 200 in 3.1s (compile: 1789660384.1s, render: 0ms)
- GET /api/backend/api/news/latest?lang=ky&take=3 200 in 1.1s
-22:44:42 [vite] (rsc) hmr update /app/globals.css
-22:44:42 [vite] (client) hmr update /app/globals.css?direct
- GET /?_rsc 200 in 4.6s (compile: 1789660386.6s, render: 0ms)
-22:45:41 [vite] (rsc) hmr update /app/globals.css
-22:45:41 [vite] (client) hmr update /app/globals.css?direct
- GET /?_rsc 200 in 2.7s (compile: 1789660384.7s, render: 0ms)
- GET / 200 in 4.9s (compile: 1789660382.8s, render: 4.4s)
- GET /about?_rsc=NZOER9_Iicx1d9mR 200 in 4.7s (compile: 1789660385.5s, render: 0ms)
- GET /news?_rsc=NZOER9_Iicx1d9mR 200 in 4.8s (compile: 1789660385.5s, render: 0ms)
- GET /contacts?_rsc=NZOER9_Iicx1d9mR 200 in 5.0s (compile: 1789660385.6s, render: 0ms)
- GET / 200 in 5.5s (compile: 1789660382.8s, render: 5.0s)
- GET /api/backend/api/news/latest?lang=ky&take=3 200 in 3.1s
- GET /about?_rsc=NZOER9_Iicx1d9mR 200 in 3.2s (compile: 1789660383.9s, render: 0ms)
- GET /news?_rsc=NZOER9_Iicx1d9mR 200 in 3.4s (compile: 1789660384.0s, render: 0ms)
- GET /contacts?_rsc=NZOER9_Iicx1d9mR 200 in 3.5s (compile: 1789660384.0s, render: 0ms)
- GET / 200 in 4.9s (compile: 1789660382.8s, render: 4.3s)
- GET /about?_rsc=NZOER9_Iicx1d9mR 200 in 3.1s (compile: 1789660384.0s, render: 0ms)
- GET /news?_rsc=NZOER9_Iicx1d9mR 200 in 3.3s (compile: 1789660384.0s, render: 0ms)
- GET /contacts?_rsc=NZOER9_Iicx1d9mR 200 in 3.5s (compile: 1789660384.0s, render: 0ms)
- GET /news/new-season 200 in 6.2s (compile: 1789660383.9s, render: 4.6s)
- GET /api/backend/api/news/new-season?lang=ky 404 in 3.0s
- GET /news?_rsc=qfQbyqgw1QyzryIG 200 in 4.3s (compile: 1789660384.2s, render: 0ms)
- GET /?_rsc=qfQbyqgw1QyzryIG 200 in 4.5s (compile: 1789660385.6s, render: 0ms)
- GET /about?_rsc=qfQbyqgw1QyzryIG 200 in 4.6s (compile: 1789660384.1s, render: 0ms)
- GET /contacts?_rsc=qfQbyqgw1QyzryIG 200 in 4.8s (compile: 1789660384.2s, render: 0ms)
- GET /news 200 in 5.3s (compile: 1789660382.7s, render: 4.9s)
- GET /api/backend/api/news?lang=ru&page=1&pageSize=12 200 in 2.1s
- GET /about?_rsc=Yy25Brs4oF4OetG1 200 in 3.0s (compile: 1789660383.5s, render: 0ms)
- GET /?_rsc=Yy25Brs4oF4OetG1 200 in 3.2s (compile: 1789660384.6s, render: 0ms)
- GET /contacts?_rsc=Yy25Brs4oF4OetG1 200 in 3.4s (compile: 1789660383.4s, render: 0ms)
- GET /?_rsc=Yy25Brs4oF4OetG1 200 in 786ms (compile: 1789660382.8s, render: 0ms)
- GET / 200 in 24.3s (compile: 1789660389.0s, render: 17.1s)
- GET /api/backend/api/news/latest?lang=ru&take=3 200 in 5.9s
- GET /news?_rsc=NZOER9_Iicx1d9mR 200 in 6.3s (compile: 1789660385.8s, render: 0ms)
- GET /about?_rsc=NZOER9_Iicx1d9mR 200 in 6.5s (compile: 1789660385.9s, render: 0ms)
- GET /contacts?_rsc=NZOER9_Iicx1d9mR 200 in 6.8s (compile: 1789660385.7s, render: 0ms)
- GET /about?_rsc=NZOER9_Iicx1d9mR 200 in 1.4s (compile: 1789660382.9s, render: 0ms)
- GET /?_rsc=pLJGGFQyJAB1jrj8 200 in 3.1s (compile: 1789660383.6s, render: 0ms)
- GET /news?_rsc=pLJGGFQyJAB1jrj8 200 in 3.3s (compile: 1789660383.2s, render: 0ms)
- GET /contacts?_rsc=pLJGGFQyJAB1jrj8 200 in 3.5s (compile: 1789660383.1s, render: 0ms)
- GET /api/backend/api/news?lang=ru&page=1&pageSize=12 200 in 1.3s
- GET /news/community-meeting?_rsc=OQI4w_HAh-PbEX2C 200 in 1.4s (compile: 1789660383.5s, render: 0ms)
- GET /api/backend/api/news/community-meeting?lang=ru 200 in 1.3s
- GET / 200 in 5.5s (compile: 1789660382.8s, render: 4.8s)
- GET /api/backend/api/news/latest?lang=ru&take=3 200 in 2.2s
- GET /news?_rsc=NZOER9_Iicx1d9mR 200 in 2.7s (compile: 1789660383.5s, render: 0ms)
- GET /about?_rsc=NZOER9_Iicx1d9mR 200 in 2.8s (compile: 1789660384.1s, render: 0ms)
- GET /contacts?_rsc=NZOER9_Iicx1d9mR 200 in 3.0s (compile: 1789660383.6s, render: 0ms)
- GET /about 200 in 5.3s (compile: 1789660382.7s, render: 4.9s)
- GET /?_rsc=pLJGGFQyJAB1jrj8 200 in 1.9s (compile: 1789660383.4s, render: 0ms)
- GET /news?_rsc=pLJGGFQyJAB1jrj8 200 in 2.0s (compile: 1789660383.0s, render: 0ms)
- GET /contacts?_rsc=pLJGGFQyJAB1jrj8 200 in 2.2s (compile: 1789660383.0s, render: 0ms)
-23:28:02 [vite] (rsc) hmr update /app/globals.css
-23:28:02 [vite] (client) hmr update /app/globals.css?direct
- GET /about?_rsc 200 in 3.3s (compile: 1789660385.4s, render: 0ms)
- GET /about 200 in 5.4s (compile: 1789660382.8s, render: 5.0s)
- GET /?_rsc=pLJGGFQyJAB1jrj8 200 in 3.5s (compile: 1789660384.8s, render: 0ms)
- GET /news?_rsc=pLJGGFQyJAB1jrj8 200 in 3.7s (compile: 1789660384.7s, render: 0ms)
- GET /contacts?_rsc=pLJGGFQyJAB1jrj8 200 in 3.9s (compile: 1789660384.7s, render: 0ms)
- GET / 200 in 5.8s (compile: 1789660383.1s, render: 5.0s)
- GET /about?_rsc=NZOER9_Iicx1d9mR 200 in 2.7s (compile: 1789660383.6s, render: 0ms)
- GET /news?_rsc=NZOER9_Iicx1d9mR 200 in 2.9s (compile: 1789660384.1s, render: 0ms)
- GET /contacts?_rsc=NZOER9_Iicx1d9mR 200 in 3.2s (compile: 1789660384.2s, render: 0ms)
- GET /api/backend/api/news/latest?lang=ru&take=3 200 in 3.5s
- GET / 200 in 5.6s (compile: 1789660382.7s, render: 5.2s)
- GET /news?_rsc=NZOER9_Iicx1d9mR 200 in 3.0s (compile: 1789660383.5s, render: 0ms)
- GET /about?_rsc=NZOER9_Iicx1d9mR 200 in 3.1s (compile: 1789660383.5s, render: 0ms)
- GET /contacts?_rsc=NZOER9_Iicx1d9mR 200 in 3.3s (compile: 1789660383.5s, render: 0ms)
-23:30:20 [vite] (rsc) hmr update /app/globals.css
-23:30:20 [vite] (client) hmr update /app/globals.css?direct
- GET /?_rsc 200 in 2.5s (compile: 1789660384.5s, render: 0ms)
- GET / 200 in 4.9s (compile: 1789660382.7s, render: 4.4s)
- GET /api/backend/api/news/latest?lang=ru&take=3 200 in 3.6s
- GET /news?_rsc=NZOER9_Iicx1d9mR 200 in 5.1s (compile: 1789660386.2s, render: 0ms)
- GET /about?_rsc=NZOER9_Iicx1d9mR 200 in 5.2s (compile: 1789660386.1s, render: 0ms)
- GET /contacts?_rsc=NZOER9_Iicx1d9mR 200 in 5.4s (compile: 1789660386.1s, render: 0ms)
-23:30:57 [vite] (rsc) hmr update /app/globals.css
-23:30:57 [vite] (client) hmr update /app/globals.css?direct
- GET /?_rsc 200 in 4.2s (compile: 1789660386.2s, render: 0ms)
- GET / 200 in 4.9s (compile: 1789660382.8s, render: 4.3s)
- GET /api/backend/api/news/latest?lang=ru&take=3 200 in 3.7s
- GET /about?_rsc=NZOER9_Iicx1d9mR 200 in 5.6s (compile: 1789660386.1s, render: 0ms)
- GET /news?_rsc=NZOER9_Iicx1d9mR 200 in 5.8s (compile: 1789660386.1s, render: 0ms)
- GET /contacts?_rsc=NZOER9_Iicx1d9mR 200 in 5.9s (compile: 1789660387.0s, render: 0ms)
- GET /about?_rsc=NZOER9_Iicx1d9mR 200 in 819ms (compile: 1789660382.8s, render: 0ms)
- GET /?_rsc=pLJGGFQyJAB1jrj8 200 in 3.4s (compile: 1789660382.9s, render: 0ms)
- GET /news?_rsc=pLJGGFQyJAB1jrj8 200 in 3.6s (compile: 1789660384.6s, render: 0ms)
+23:51:38 [vite] (client) [optimizer] bundling dependencies...
+ GET /about 200 in 16.5s (compile: 1789667467.4s, render: 15.1s)
+ GET /?_rsc=pLJGGFQyJAB1jrj8 200 in 5.8s (compile: 1789667470.5s, render: 0ms)
+ GET /news?_rsc=pLJGGFQyJAB1jrj8 200 in 5.8s (compile: 1789667470.5s, render: 0ms)
+ GET /contacts?_rsc=pLJGGFQyJAB1jrj8 200 in 5.9s (compile: 1789667471.3s, render: 0ms)
+23:54:37 [vite] (rsc) hmr update /app/globals.css
+23:54:39 [vite] (client) hmr update /app/globals.css?direct
+ GET /about?_rsc 200 in 4.5s (compile: 1789667470.3s, render: 0ms)
+ GET /about 200 in 6.8s (compile: 1789667468.3s, render: 4.5s)
+ GET /?_rsc=pLJGGFQyJAB1jrj8 200 in 5.4s (compile: 1789667470.8s, render: 0ms)
+ GET /news?_rsc=pLJGGFQyJAB1jrj8 200 in 5.5s (compile: 1789667470.3s, render: 0ms)
+ GET /contacts?_rsc=pLJGGFQyJAB1jrj8 200 in 5.5s (compile: 1789667470.3s, render: 0ms)
+ GET /news 200 in 6.8s (compile: 1789667468.4s, render: 4.6s)
+ GET /?_rsc=Yy25Brs4oF4OetG1 200 in 3.9s (compile: 1789667468.5s, render: 0ms)
+ GET /about?_rsc=Yy25Brs4oF4OetG1 200 in 4.0s (compile: 1789667468.4s, render: 0ms)
+ GET /contacts?_rsc=Yy25Brs4oF4OetG1 200 in 4.1s (compile: 1789667468.4s, render: 0ms)
+ GET /api/backend/api/news?lang=ru&page=1&pageSize=12 200 in 9.8s
+ GET /contacts 200 in 7.3s (compile: 1789667468.7s, render: 4.7s)
+ GET /?_rsc=mQ8-DhdA9y9hKsol 200 in 2.2s (compile: 1789667467.5s, render: 0ms)
+ GET /about?_rsc=mQ8-DhdA9y9hKsol 200 in 2.2s (compile: 1789667466.9s, render: 0ms)
+ GET /news?_rsc=mQ8-DhdA9y9hKsol 200 in 2.3s (compile: 1789667466.9s, render: 0ms)
+ GET /contacts 200 in 5.7s (compile: 1789667466.6s, render: 5.2s)
+ GET /?_rsc=mQ8-DhdA9y9hKsol 200 in 2.5s (compile: 1789667467.5s, render: 0ms)
+ GET /news?_rsc=mQ8-DhdA9y9hKsol 200 in 2.6s (compile: 1789667467.6s, render: 0ms)
+ GET /about?_rsc=mQ8-DhdA9y9hKsol 200 in 2.6s (compile: 1789667467.4s, render: 0ms)
