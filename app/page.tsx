@@ -187,7 +187,7 @@ const valueImages = [
     },
   },
   {
-    src: "/about-our-approach-collaboration-v2.png",
+    src: "/about-our-approach-collaboration-v2.webp",
     alt: {
       ru: "Молодые люди вместе работают над учебным заданием",
       ky: "Жаштар окуу тапшырмасынын үстүндө чогуу иштеп жатышат",
@@ -195,7 +195,7 @@ const valueImages = [
     },
   },
   {
-    src: "/about-social-impact-community.png",
+    src: "/about-social-impact-community.webp",
     alt: {
       ru: "Молодые люди вместе создают план общественного проекта",
       ky: "Жаштар коомдук долбоордун планын чогуу түзүп жатышат",
@@ -292,8 +292,8 @@ export default function Home() {
       <link
         rel="preload"
         as="image"
-        href="/sabat-hero-sky.png"
-        type="image/png"
+        href="/sabat-hero-sky.webp"
+        type="image/webp"
         fetchPriority="high"
       />
       <Header />
@@ -456,6 +456,7 @@ export default function Home() {
                     src={valueImages[index].src}
                     alt={valueImages[index].alt[language]}
                     fill
+                    loading="eager"
                     sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 1200px) 50vw, 570px"
                   />
                 </div>

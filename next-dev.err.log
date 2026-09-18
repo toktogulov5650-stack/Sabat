@@ -1,3 +1,6 @@
-00:24:35 [vite] (rsc) warning: client component dependency is inconsistently optimized. It's recommended to add the dependency to 'optimizeDeps.exclude'.
+[vinext] Server render error: [Error: Network connection lost.] { retryable: true }
+[vinext] Server render error: [Error: Network connection lost.] { retryable: true }
+[vinext] Server render error: [Error: Network connection lost.] { retryable: true }
+12:48:55 [vite] (rsc) warning: client component dependency is inconsistently optimized. It's recommended to add the dependency to 'optimizeDeps.exclude'.
   Plugin: rsc:use-client
   File: D:/Sabat/node_modules/vinext/dist/shims/internal/app-prefetch-fetch-queue.js?v=d091c8cc

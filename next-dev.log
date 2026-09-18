@@ -8,21 +8,4 @@
 Using secrets defined in .env.local
   ➜  Local:   http://localhost:3000/
   ➜  Debug:   http://localhost:3000/__debug
- GET /about 200 in 21.0s (compile: 1789669282.4s, render: 17.6s)
- GET /?_rsc=pLJGGFQyJAB1jrj8 200 in 4.5s (compile: 1789669282.1s, render: 0ms)
- GET /news?_rsc=pLJGGFQyJAB1jrj8 200 in 4.6s (compile: 1789669282.1s, render: 0ms)
- GET /contacts?_rsc=pLJGGFQyJAB1jrj8 200 in 4.7s (compile: 1789669282.9s, render: 0ms)
- GET /news?_rsc=pLJGGFQyJAB1jrj8 200 in 2.5s (compile: 1789669281.3s, render: 0ms)
- GET /about?_rsc=Yy25Brs4oF4OetG1 200 in 3.9s (compile: 1789669280.9s, render: 0ms)
- GET /?_rsc=Yy25Brs4oF4OetG1 200 in 4.0s (compile: 1789669281.9s, render: 0ms)
- GET /contacts?_rsc=Yy25Brs4oF4OetG1 200 in 4.0s (compile: 1789669280.9s, render: 0ms)
- GET /news?_rsc=OQI4w_HAh-PbEX2C 200 in 1.6s (compile: 1789669280.4s, render: 0ms)
- GET /api/backend/api/news?lang=ru&page=1&pageSize=12 200 in 8.3s
- GET /contacts?_rsc=Yy25Brs4oF4OetG1 200 in 2.6s (compile: 1789669281.4s, render: 0ms)
- GET /?_rsc=mQ8-DhdA9y9hKsol 200 in 1.9s (compile: 1789669280.0s, render: 0ms)
- GET /about?_rsc=mQ8-DhdA9y9hKsol 200 in 3.2s (compile: 1789669279.9s, render: 0ms)
- GET /news?_rsc=mQ8-DhdA9y9hKsol 200 in 3.3s (compile: 1789669280.0s, render: 0ms)
- GET /contacts 200 in 9.0s (compile: 1789669274.0s, render: 7.9s)
- GET /?_rsc=mQ8-DhdA9y9hKsol 200 in 3.1s (compile: 1789669275.0s, render: 0ms)
- GET /about?_rsc=mQ8-DhdA9y9hKsol 200 in 3.3s (compile: 1789669274.2s, render: 0ms)
- GET /news?_rsc=mQ8-DhdA9y9hKsol 200 in 3.5s (compile: 1789669274.3s, render: 0ms)
+ GET / 200 in 28.6s (compile: 1789713858.6s, render: 25.8s)
