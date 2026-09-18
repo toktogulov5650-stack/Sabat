@@ -9,3 +9,10 @@ Using secrets defined in .env.local
   ➜  Local:   http://localhost:3000/
   ➜  Debug:   http://localhost:3000/__debug
  GET / 200 in 28.6s (compile: 1789713858.6s, render: 25.8s)
+12:52:19 [vite] (rsc) hmr update /app/globals.css
+12:52:19 [vite] (client) hmr update /app/globals.css?direct
+ GET / 200 in 7.6s (compile: 1789713859.2s, render: 4.7s)
+ GET /api/backend/api/news/latest?lang=ru&take=3 200 in 4.5s
+ GET /news?_rsc=NZOER9_Iicx1d9mR 200 in 5.6s (compile: 1789713860.8s, render: 0ms)
+ GET /about?_rsc=NZOER9_Iicx1d9mR 200 in 5.7s (compile: 1789713860.8s, render: 0ms)
+ GET /contacts?_rsc=NZOER9_Iicx1d9mR 200 in 5.8s (compile: 1789713860.8s, render: 0ms)
