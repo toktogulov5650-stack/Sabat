@@ -76,7 +76,7 @@ export function NewsEditor({ id }: { id?: string }) {
   const completeLanguages = useMemo(
     () => new Set(languages.filter(({ value }) => {
       const item = translations[value];
-      return item.category.trim() && item.title.trim() && item.excerpt.trim() && item.content.trim();
+      return item.title.trim() && item.content.trim();
     }).map(({ value }) => value)),
     [translations],
   );
@@ -117,8 +117,8 @@ export function NewsEditor({ id }: { id?: string }) {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError("");
-    if (status === "Published" && completeLanguages.size !== 3) {
-      setError("Для публикации заполните все поля перевода на русском, кыргызском и английском.");
+    if (status === "Published" && completeLanguages.size === 0) {
+      setError("Для публикации заполните заголовок и текст хотя бы на одном языке.");
       return;
     }
     const payload: UpsertNews = {
@@ -128,7 +128,7 @@ export function NewsEditor({ id }: { id?: string }) {
       coverImageUrl: coverImageUrl.trim() || null,
       status,
       publishedAt: status === "Published" ? (publishedAt ? new Date(publishedAt).toISOString() : new Date().toISOString()) : null,
-      translations: languages.map(({ value }) => ({
+      translations: languages.filter(({ value }) => translations[value].title.trim() || translations[value].content.trim()).map(({ value }) => ({
         ...translations[value],
         category: translations[value].category.trim(),
         title: translations[value].title.trim(),
@@ -159,14 +159,12 @@ export function NewsEditor({ id }: { id?: string }) {
       {error ? <div className="admin-alert" role="alert">{error}</div> : null}
       <div className="admin-form-grid">
         <section className="admin-card">
-          <div className="admin-card-head"><h2>Переводы</h2><span className="admin-field-hint">{completeLanguages.size} из 3 заполнено</span></div>
+          <div className="admin-card-head"><h2>Текст новости</h2><span className="admin-field-hint">Достаточно заполнить один язык</span></div>
           <div className="admin-language-tabs" role="tablist">
             {languages.map(({ value, label }) => <button key={value} type="button" className={activeLanguage === value ? "active" : ""} onClick={() => setActiveLanguage(value)} role="tab" aria-selected={activeLanguage === value}>{label}{completeLanguages.has(value) ? <span className="admin-language-ok" /> : null}</button>)}
           </div>
           <div className="admin-form-section admin-fields-grid" role="tabpanel">
-            <label className="admin-field full">Категория<input value={currentTranslation.category} onChange={(event) => updateTranslation("category", event.target.value)} placeholder="Например: Образование" required={status === "Published"} /></label>
             <label className="admin-field full">Заголовок<input value={currentTranslation.title} onChange={(event) => updateTranslation("title", event.target.value)} placeholder="Заголовок новости" required={status === "Published"} /></label>
-            <label className="admin-field full">Краткое описание<textarea value={currentTranslation.excerpt} onChange={(event) => updateTranslation("excerpt", event.target.value)} placeholder="Короткий анонс для карточки новости" required={status === "Published"} /></label>
             <label className="admin-field full">Текст новости<textarea className="admin-content-input" value={currentTranslation.content} onChange={(event) => updateTranslation("content", event.target.value)} placeholder="Полный текст публикации" required={status === "Published"} /></label>
           </div>
         </section>
@@ -174,9 +172,6 @@ export function NewsEditor({ id }: { id?: string }) {
           <section className="admin-card">
             <div className="admin-card-head"><h2>Публикация</h2></div>
             <div className="admin-form-section admin-fields-grid">
-              <label className="admin-field full">Slug<input value={slug} onChange={(event) => setSlug(event.target.value)} placeholder="news-title" pattern="[a-z0-9]+(?:-[a-z0-9]+)*" required /><span className="admin-field-hint">Латиница, цифры и дефисы.</span></label>
-              <label className="admin-field full">Ключ категории<input value={categoryKey} onChange={(event) => setCategoryKey(event.target.value)} placeholder="education" required /></label>
-              <label className="admin-field full">Автор<input value={author} onChange={(event) => setAuthor(event.target.value)} placeholder={'Общественный фонд "Сабат"'} /></label>
               <label className="admin-field full">Статус<select value={status} onChange={(event) => setStatus(event.target.value as NewsStatus)}><option value="Draft">Черновик</option><option value="Published">Опубликовано</option><option value="Archived">В архиве</option></select></label>
               {status === "Published" ? <label className="admin-field full">Дата публикации<input type="datetime-local" value={publishedAt} onChange={(event) => setPublishedAt(event.target.value)} /></label> : null}
             </div>
