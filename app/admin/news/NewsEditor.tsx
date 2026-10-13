@@ -43,14 +43,17 @@ export function NewsEditor({ id }: { id?: string }) {
   const [categoryKey, setCategoryKey] = useState("");
   const [author, setAuthor] = useState("");
   const [coverImageUrl, setCoverImageUrl] = useState("");
-  const [status, setStatus] = useState<NewsStatus>("Draft");
+  const [status, setStatus] = useState<NewsStatus>(id ? "Draft" : "Published");
   const [publishedAt, setPublishedAt] = useState("");
   const [translations, setTranslations] = useState<Record<AdminLanguage, NewsTranslation>>({
     ru: emptyTranslation("ru"), ky: emptyTranslation("ky"), en: emptyTranslation("en"),
   });
 
   useEffect(() => {
-    if (!id) return;
+    if (!id) {
+      setPublishedAt(toDateTimeLocal(new Date().toISOString()));
+      return;
+    }
     let active = true;
     adminRequest<AdminNews>(`/api/admin/news/${id}`)
       .then((item) => {
@@ -138,11 +141,11 @@ export function NewsEditor({ id }: { id?: string }) {
     };
     setSaving(true);
     try {
-      const saved = await adminRequest<AdminNews>(id ? `/api/admin/news/${id}` : "/api/admin/news", {
+      await adminRequest<AdminNews>(id ? `/api/admin/news/${id}` : "/api/admin/news", {
         method: id ? "PUT" : "POST",
         body: JSON.stringify(payload),
       });
-      router.replace(`/admin/news/${saved.id}`);
+      router.push("/admin/news");
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : "Не удалось сохранить новость.");
       setSaving(false);
