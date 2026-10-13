@@ -144,6 +144,9 @@ export function NewsStory({ slug }: { slug: string }) {
     .split(/\r?\n\s*\r?\n/)
     .map((paragraph) => paragraph.trim())
     .filter(Boolean);
+  const compact = (value: string) => value.replace(/\s+/g, " ").trim();
+  const excerptStart = compact(normalizedExcerpt).replace(/…$/, "").trim();
+  const showIntro = Boolean(excerptStart) && !compact(paragraphs.join(" ")).startsWith(excerptStart);
 
   return (
     <>
@@ -169,7 +172,7 @@ export function NewsStory({ slug }: { slug: string }) {
                     {normalizedAuthor ? <span>{normalizedAuthor}</span> : null}
                   </div>
                   <h1>{normalizedTitle}</h1>
-                  <p className="news-story-paper-intro">{normalizedExcerpt}</p>
+                  {showIntro ? <p className="news-story-paper-intro">{normalizedExcerpt}</p> : null}
                   {paragraphs.slice(0, 2).map((paragraph, index) => (
                     <p key={`${index}-${paragraph}`}>{paragraph}</p>
                   ))}
