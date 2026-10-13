@@ -7598,3 +7598,15 @@ video {
   max-width: 760px;
   padding-bottom: 48px;
 }
+
+/* News story: all text beside the photo; photo stays in view while reading */
+@media (min-width: 1025px) {
+  .news-story-inline-photo {
+    position: sticky;
+    top: 24px;
+  }
+
+  .news-story-paper-copy {
+    padding-bottom: 48px;
+  }
+}
