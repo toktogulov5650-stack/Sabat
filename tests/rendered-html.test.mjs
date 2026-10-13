@@ -33,7 +33,7 @@ test("server-renders the Sabat homepage without a loading-only state", async () 
     html,
     /Настоящий профессионал начинается с настоящего человека\./,
   );
-  assert.match(html, /Новый сезон проектов Общественного фонда &quot;Сабат&quot;/);
+  assert.doesNotMatch(html, /Новый сезон проектов Общественного фонда &quot;Сабат&quot;/);
   assert.doesNotMatch(html, /Загружаем новости/);
   assert.doesNotMatch(html, /Your site is taking shape|Building your site/);
 });
@@ -44,6 +44,6 @@ test("server-renders the news archive with immediate content", async () => {
 
   const html = await response.text();
   assert.match(html, /Истории и идеи Общественного фонда &quot;Сабат&quot;/);
-  assert.match(html, /Новый сезон проектов Общественного фонда &quot;Сабат&quot;/);
+  assert.doesNotMatch(html, /Новый сезон проектов Общественного фонда &quot;Сабат&quot;/);
   assert.doesNotMatch(html, /Загружаем публикации/);
 });
