@@ -7599,14 +7599,34 @@ video {
   padding-bottom: 48px;
 }
 
-/* News story: all text beside the photo; photo stays in view while reading */
+/* News story: newspaper layout, text wraps around the photo */
 @media (min-width: 1025px) {
+  .news-story-paper-grid {
+    display: flow-root;
+  }
+
   .news-story-inline-photo {
-    position: sticky;
-    top: 24px;
+    float: left;
+    position: relative;
+    width: calc(50% - 34px);
+    margin: 0 clamp(38px, 5vw, 68px) 24px 0;
   }
 
   .news-story-paper-copy {
+    display: block;
     padding-bottom: 48px;
+  }
+
+  .news-story-paper-copy > p {
+    margin: 0 0 18px;
+  }
+
+  .news-story-paper-copy > .news-editorial-meta {
+    margin-bottom: 14px;
+  }
+
+  .news-story-paper-copy h1 {
+    max-width: none;
+    margin: 0 0 22px;
   }
 }
