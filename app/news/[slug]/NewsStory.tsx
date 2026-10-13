@@ -173,17 +173,10 @@ export function NewsStory({ slug }: { slug: string }) {
                   </div>
                   <h1>{normalizedTitle}</h1>
                   {showIntro ? <p className="news-story-paper-intro">{normalizedExcerpt}</p> : null}
-                  {paragraphs.slice(0, 2).map((paragraph, index) => (
+                  {paragraphs.map((paragraph, index) => (
                     <p key={`${index}-${paragraph}`}>{paragraph}</p>
                   ))}
                 </div>
-                {paragraphs.length > 2 ? (
-                  <div className="news-story-continuation">
-                    {paragraphs.slice(2).map((paragraph, index) => (
-                      <p key={`${index}-${paragraph}`}>{paragraph}</p>
-                    ))}
-                  </div>
-                ) : null}
               </div>
             </section>
           </div>
