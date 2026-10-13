@@ -14,7 +14,6 @@ import {
   type NewsPage,
 } from "../lib/api";
 import { archiveCopy } from "./content";
-import { fallbackNews } from "./fallback";
 
 const controlsCopy = {
   ru: {
@@ -67,8 +66,8 @@ function NewsImage({ item, className }: { item: NewsListItem; className: string 
 export function NewsArchive() {
   const [language, setLanguage] = useState<Language>("ru");
   const [currentPage, setCurrentPage] = useState(1);
-  const [newsPage, setNewsPage] = useState<NewsPage | null>(fallbackNews.ru);
-  const [isLoading, setIsLoading] = useState(false);
+  const [newsPage, setNewsPage] = useState<NewsPage | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const [requestVersion, setRequestVersion] = useState(0);
   const [showcaseOffset, setShowcaseOffset] = useState(0);
@@ -99,9 +98,8 @@ export function NewsArchive() {
     });
 
     async function loadNews() {
-      const availableFallback = currentPage === 1 ? fallbackNews[language] : null;
-      setNewsPage(availableFallback);
-      setIsLoading(!availableFallback);
+      setNewsPage(null);
+      setIsLoading(true);
       setError(false);
 
       try {
@@ -111,8 +109,8 @@ export function NewsArchive() {
         setNewsPage(result);
       } catch (requestError) {
         if (requestError instanceof DOMException && requestError.name === "AbortError") return;
-        setNewsPage(availableFallback);
-        setError(!availableFallback);
+        setNewsPage(null);
+        setError(true);
       } finally {
         if (!controller.signal.aborted) setIsLoading(false);
       }

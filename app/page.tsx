@@ -14,7 +14,6 @@ import {
   type NewsListItem,
   type NewsPage,
 } from "./lib/api";
-import { fallbackNews } from "./news/fallback";
 
 const pageContent = {
   ru: {
@@ -206,9 +205,8 @@ const valueImages = [
 
 export default function Home() {
   const [language, setLanguage] = useState<Language>("ru");
-  const [news, setNews] = useState<NewsListItem[]>(
-    fallbackNews.ru.items.slice(0, 3),
-  );
+  const [news, setNews] = useState<NewsListItem[]>([]);
+  const [newsLoaded, setNewsLoaded] = useState(false);
   const [newsError, setNewsError] = useState(false);
   const [newsOffset, setNewsOffset] = useState(0);
   const [newsDirection, setNewsDirection] = useState<"previous" | "next" | null>(null);
@@ -251,7 +249,8 @@ export default function Home() {
     const controller = new AbortController();
 
     async function loadNews() {
-      setNews(fallbackNews[language].items.slice(0, 3));
+      setNews([]);
+      setNewsLoaded(false);
       setNewsError(false);
       setNewsOffset(0);
       setNewsDirection(null);
@@ -262,11 +261,10 @@ export default function Home() {
           { signal: controller.signal },
         );
         setNews(result.items);
+        setNewsLoaded(true);
       } catch (error) {
         if (error instanceof DOMException && error.name === "AbortError") return;
-        // Keep the built-in snapshot visible during a cold start or a
-        // temporary API outage. The next visit refreshes it again.
-        setNews(fallbackNews[language].items.slice(0, 3));
+        setNewsError(true);
       }
     }
 
@@ -364,7 +362,7 @@ export default function Home() {
 
           {newsError ? (
             <p className="container news-status news-status-error" role="alert">{content.newsError}</p>
-          ) : news.length === 0 ? (
+          ) : newsLoaded && news.length === 0 ? (
             <p className="container news-status">{content.newsEmpty}</p>
           ) : (
             <div
